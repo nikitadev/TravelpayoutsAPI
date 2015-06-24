@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="AviaTicketsWpfApplication.Views.SearchByMonthView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:properties="clr-namespace:AviaTicketsWpfApplication.Properties"
+             xmlns:vm="clr-namespace:AviaTicketsWpfApplication.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:ignore="http://www.ignore.com"
+             mc:Ignorable="d ignore"
+             Template="{StaticResource ElementControlTemplateKey}"
+             DataContext="{Binding SearchByMonth, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{x:Static properties:Resources.Original}" />
+                    <ComboBox Width="200"
+                              Height="35"
+                              Margin="0, 10, 0, 0"
+                              Style="{StaticResource VirtualisedMetroComboBox}"
+                              controls:TextBoxHelper.Watermark="{x:Static properties:Resources.WatermarkAutoTextBox}"
+                              DisplayMemberPath="CultureName"
+                              SelectedValue="{Binding OriginalSelectValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                              IsEditable="True"
+                              ItemsSource="{Binding OriginalCities}"
+                              MaxDropDownHeight="125"
+                              Text="{Binding Path=CultureName}" />
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="{x:Static properties:Resources.Destination}" />
+                    <ComboBox Width="200"
+                              Height="35"
+                              Margin="0, 10, 0, 0"
+                              Style="{StaticResource VirtualisedMetroComboBox}"
+                              controls:TextBoxHelper.Watermark="{x:Static properties:Resources.WatermarkAutoTextBox}"
+                              DisplayMemberPath="CultureName"
+                              SelectedValue="{Binding DestinationSelectValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                              IsEditable="True"
+                              ItemsSource="{Binding DestinationCities}"
+                              MaxDropDownHeight="125"
+                              Text="{Binding Path=CultureName}" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Border Grid.Row="1" Margin="0,10,0,0" BorderThickness="1,1,1,0" Height="7" BorderBrush="{StaticResource AccentColorBrush}" Background="Transparent" VerticalAlignment="Top" />
+        <Border Grid.Row="1" HorizontalAlignment="Center" Background="{StaticResource GrayBrush10}">
+            <TextBlock Margin="5,0" Foreground="{StaticResource AccentColorBrush}" Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat={}{0:yyyy}}" />
+        </Border>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding Months}" Margin="0,5,0,10"
+                      VerticalAlignment="Top" HorizontalAlignment="Center">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:MonthViewModel}">
+                    <ToggleButton Width="60" Height="60" Margin="2,0" IsChecked="{Binding IsChecked}" Background="{StaticResource AccentColorBrush}">
+                        <TextBlock TextAlignment="Center" Text="{Binding Name}" VerticalAlignment="Bottom" />
+                    </ToggleButton>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <StackPanel Grid.Row="3"
+                    VerticalAlignment="Top">
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{x:Static properties:Resources.DurationLeave}">
+                            <Binding ElementName="slider" Path="LowerValue" />
+                            <Binding ElementName="slider" Path="UpperValue" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Label>
+            <controls:RangeSlider x:Name="slider"
+                                  Minimum="1"
+                                  Maximum="30"
+                                  Height="20"
+                                  Margin="10"
+                                  LowerValue="{Binding DurationLower}"
+                                  UpperValue="{Binding DurationUpper}"
+                                  AutoToolTipPlacement="TopLeft"
+                                  TickPlacement="BottomRight" />
+        </StackPanel>
+        <Button Grid.Row="4" Margin="10"
+                Height="35" Width="200"
+                Background="DarkOrange" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Center" 
+                Command="{Binding SearchCommand}"
+                IsEnabled="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityInvertConverterKey}}" >
+            <TextBlock Text="{x:Static properties:Resources.TitleShowPrices}" FontSize="17" />
+        </Button>
+        <Label Grid.Row="5" Margin="0,5,0,0" Width="410" VerticalAlignment="Top" HorizontalAlignment="Right" 
+               Visibility="{Binding IsMessageVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+            <TextBlock Text="{Binding Message}" TextWrapping="WrapWithOverflow" />
+        </Label>
+    </Grid>
+</UserControl>

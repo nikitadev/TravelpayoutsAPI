@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+
+    <ControlTemplate x:Key="PageControlTemplateKey" TargetType="{x:Type Page}">
+        <Grid>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding ContentLoadedCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Unloaded">
+                    <i:InvokeCommandAction Command="{Binding ContentUnloadedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ContentPresenter Content="{TemplateBinding Content}" 
+                              Visibility="{Binding IsVisibleData, Converter={StaticResource BooleanToVisibilityConverterKey}}" />
+            <Label Content="{Binding PageMessage}" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Style="{StaticResource DescriptionHeaderStyleKey}"
+                   Visibility="{Binding IsPageMessageVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+            </Label>
+            <controls:ProgressRing IsActive="{Binding IsProgress}" />
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ElementControlTemplateKey" TargetType="{x:Type ContentControl}">
+        <Grid>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding ContentLoadedCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Unloaded">
+                    <i:InvokeCommandAction Command="{Binding ContentUnloadedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ContentPresenter Content="{TemplateBinding Content}" />
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="FrameControlTemplateKey" TargetType="{x:Type Frame}">
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Width="50" Height="50"
+                        Command="NavigationCommands.BrowseBack"
+                        Style="{DynamicResource MetroCircleButtonStyle}">
+                    <Rectangle Width="20" Height="20"
+                               Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                                         Visual="{StaticResource appbar_arrow_left}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <Label x:Name="PART_Title"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Style="{DynamicResource DescriptionHeaderStyleKey}" />
+            </Grid>
+            <ContentPresenter x:Name="PART_FrameCP" />
+        </DockPanel>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="CanGoForward"
+                               Value="false" />
+                    <Condition Property="CanGoBack"
+                               Value="false" />
+                </MultiTrigger.Conditions>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

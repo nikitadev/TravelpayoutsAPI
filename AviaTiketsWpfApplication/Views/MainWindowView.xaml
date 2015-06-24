@@ -1,0 +1,141 @@
+﻿<controls:MetroWindow x:Class="AviaTicketsWpfApplication.Views.MainWindowView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+                      xmlns:views="clr-namespace:AviaTicketsWpfApplication.Views"
+                      xmlns:behaviors="clr-namespace:AviaTicketsWpfApplication.Behaviors"
+                      xmlns:properties="clr-namespace:AviaTicketsWpfApplication.Properties"
+                      Title="Avia Tickets" Height="400" Width="650" 
+                      ShowTitleBar="True"
+                      WindowState="Maximized"
+                      WindowStartupLocation="CenterScreen"
+                      NonActiveGlowBrush="Red"
+                      ShowIconOnTitleBar="False"
+                      Icon="pack://application:,,,/Resources/icon.ico"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      RightWindowCommandsOverlayBehavior="HiddenTitleBar"
+                      DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <Button ToolTip="{x:Static properties:Resources.TitleAbout}" Command="{Binding AboutCommand}">
+                <Rectangle Width="22"
+                           Height="22"
+                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"
+                                     Visual="{StaticResource appbar_ticket}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <ToggleButton x:Name="showSearchButton"
+                          Content=""
+                          FontSize="16"
+                          FontFamily="Segoe UI Symbol"
+                          ToolTip="{x:Static properties:Resources.TooltipSearchButton}"
+                          IsChecked="{Binding IsFlyoutOpen}"
+                          IsEnabled="{Binding IsShowSearchButtonEnabled}" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="flyout"
+                             IsOpen="{Binding IsFlyoutOpen}">
+                <ContentControl x:Name="flyoutContent" Margin="10" />
+            </controls:Flyout>
+            <controls:Flyout x:Name="appbar"
+                             Position="Bottom"
+                             CloseButtonVisibility="Collapsed"
+                             TitleVisibility="Collapsed"
+                             IsPinned="False"
+                             Height="75"
+                             IsOpen="{Binding IsCommandBarOpen}">
+                <ContentControl x:Name="appBarContent" Margin="10" />
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
+    <controls:MetroContentControl Template="{StaticResource ElementControlTemplateKey}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:MetroProgressBar IsIndeterminate="True" 
+                                       Foreground="White"
+                                       Visibility="{Binding IsProgressVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}" />
+            <Grid Grid.Row="1" Margin="10"
+                  Visibility="{Binding IsMenuVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Content="{Binding TitleFirstColumn}" 
+                           Style="{StaticResource DescriptionHeaderStyleKey}" />
+                    <ItemsControl ItemsSource="{Binding SearchTiles}" 
+                                  ItemTemplate="{StaticResource TileItemDataTemplateKey}" 
+                                  Style="{StaticResource TilesListBoxVerticalStyleKey}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="{Binding TitleSecondColumn}" 
+                           Style="{StaticResource DescriptionHeaderStyleKey}" />
+                    <ItemsControl ItemsSource="{Binding InfoTiles}" 
+                                  ItemTemplate="{StaticResource TileItemDataTemplateKey}" 
+                                  Style="{StaticResource TilesListBoxHorizontalStyleKey}" />
+                </StackPanel>
+            </Grid>
+
+            <Frame x:Name="mainFrame" 
+                   Grid.Row="1" Margin="10" Source="{Binding PageUri}" 
+                   behaviors:FrameBehavior.Title="{Binding PageTitle}"
+                   Template="{StaticResource FrameControlTemplateKey}"
+                   Visibility="{Binding IsFrameVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Navigating">
+                        <cmd:EventToCommand Command="{Binding NavigatingCommand}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Navigated">
+                        <cmd:EventToCommand Command="{Binding NavigatedCommand}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Frame>
+            <StatusBar Grid.Row="2">
+                <StatusBarItem>
+                    <TextBlock>
+                        <Run Text="©">
+                            <Run.TextDecorations>
+                                <TextDecoration Location="Strikethrough" PenOffset="0.5" >
+                                	<TextDecoration.Pen>
+                                		<Pen Brush="Red" Thickness="2" />
+                                	</TextDecoration.Pen>
+                                </TextDecoration>                                
+                            </Run.TextDecorations>
+                        </Run>
+                        <Run Text="{x:Static properties:Resources.InfoStatusBar}" />
+                    </TextBlock> 
+                </StatusBarItem>
+                <Separator Style="{StaticResource MetroStatusBarSeparator}" 
+                           Visibility="{Binding IsFrameVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}" />
+                <StatusBarItem Visibility="{Binding IsFrameVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+                    <TextBlock>
+                        <Run Text="{x:Static properties:Resources.PageNameStatusBar}" />
+                        <Run Text="{Binding PageTitle}" />
+                    </TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </controls:MetroContentControl>
+    
+</controls:MetroWindow>

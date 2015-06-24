@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AviaTicketsWpfApplication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AirlineIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_plane_rotated_45</Value>
+    </Setting>
+    <Setting Name="AirportsIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_tardis</Value>
+    </Setting>
+    <Setting Name="CountriesIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_flag_wavy</Value>
+    </Setting>
+    <Setting Name="CitiesIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_city</Value>
+    </Setting>
+    <Setting Name="SpecialOfferIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_forsale</Value>
+    </Setting>
+    <Setting Name="CalendarTicketsIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_calendar_future</Value>
+    </Setting>
+    <Setting Name="DirectTicketsIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_return</Value>
+    </Setting>
+    <Setting Name="ChipTicketsIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_coupon</Value>
+    </Setting>
+    <Setting Name="MainUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.travelpayouts.com/</Value>
+    </Setting>
+    <Setting Name="TestToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">321d6a221f8926b5ec41ae89a3b2ae7b</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:AviaTicketsWpfApplication.Converters">
+    
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
+    <c:AirlineCodeToImagePathConverter x:Key="AirlineCodeToImagePathConverterKey" />
+    <c:BooleanToVisibilityInvertConverter x:Key="BooleanToVisibilityInvertConverterKey" />
+    <c:StringToResourceConverter x:Key="StringToResourceConverterKey" />
+    <c:DayShortNameConverter x:Key="DayShortNameConverterKey" />
+    <c:BooleanInvertConverter x:Key="BooleanInvertConverterKey" />
+    
+</ResourceDictionary>

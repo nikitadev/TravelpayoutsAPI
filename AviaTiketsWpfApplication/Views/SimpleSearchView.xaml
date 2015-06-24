@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="AviaTicketsWpfApplication.Views.SimpleSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ignore="http://www.ignore.com"
+             mc:Ignorable="d ignore"
+             Template="{StaticResource ElementControlTemplateKey}"
+             DataContext="{Binding SimpleSearch, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="searchTextBox" Height="25" Width="250" VerticalAlignment="Top" HorizontalAlignment="Right"
+                 Text="{Binding SearchText}"
+                 controls:TextBoxHelper.Watermark="{Binding Watermark}"
+                 controls:TextBoxHelper.ButtonCommand="{Binding SearchCommand, Mode=OneWay}"
+                 controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=searchTextBox, Path=Text}"
+                 Style="{DynamicResource SearchMetroTextBox}" />
+        <Label Grid.Row="1" Margin="0,5,0,0" Width="250" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="{Binding IsMessageVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+            <TextBlock Text="{Binding Message}" TextWrapping="WrapWithOverflow" />
+        </Label>
+        <ListBox Grid.Row="2" Width="250" HorizontalAlignment="Right"
+                 ItemsSource="{Binding ListResult, IsAsync=True}"
+                 ItemTemplate="{StaticResource HyperlinkDataTemplateKey}"
+                 Visibility="{Binding IsListVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9412222-62C6-47B9-A13A-74C4F694AD0D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AviaTicketsWpfApplication</RootNamespace>
+    <AssemblyName>AviaTicketsWpfApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>06148685</NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Components\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.3.71, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA071\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA071\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Behaviors\FrameBehavior.cs" />
+    <Compile Include="Controls\MetroCalendar.cs" />
+    <Compile Include="Controls\VirtualizingWrapPanel.cs" />
+    <Compile Include="Converters\AirlineCodeToImagePathConverter.cs" />
+    <Compile Include="Converters\BooleanInvertConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityInvertConverter.cs" />
+    <Compile Include="Converters\DayShortNameConverter.cs" />
+    <Compile Include="Converters\StringToResourceConverter.cs" />
+    <Compile Include="Fundamentals\Abstracts\BaseDataViewModel.Generic.cs" />
+    <Compile Include="Fundamentals\Abstracts\BasePageChartViewModel.Generic.cs" />
+    <Compile Include="Fundamentals\Abstracts\BasePageViewModel.cs" />
+    <Compile Include="Fundamentals\Abstracts\BasePageSearchResultViewModel.Generic.cs" />
+    <Compile Include="Fundamentals\Abstracts\BaseSearchQuery.cs" />
+    <Compile Include="Fundamentals\Abstracts\BaseSearchViewModel.Generic.cs" />
+    <Compile Include="Fundamentals\Abstracts\BaseViewModel.cs" />
+    <Compile Include="Fundamentals\Bootstrapper.cs" />
+    <Compile Include="Fundamentals\CacheTags.cs" />
+    <Compile Include="Fundamentals\Interfaces\ICollectionViewModel.Generic.cs" />
+    <Compile Include="Fundamentals\Interfaces\ISearchQuery.cs" />
+    <Compile Include="Fundamentals\Interfaces\IValidateViewModel.cs" />
+    <Compile Include="MessengerTokens.cs" />
+    <Compile Include="Fundamentals\Services\CacheService.cs" />
+    <Compile Include="Fundamentals\GlobalCommands.cs" />
+    <Compile Include="Fundamentals\Interfaces\ICacheService.cs" />
+    <Compile Include="Fundamentals\Repositories\CacheRepository.cs" />
+    <Compile Include="Fundamentals\DbConnection.cs" />
+    <Compile Include="Fundamentals\Interfaces\IDbConnection.cs" />
+    <Compile Include="Fundamentals\Interfaces\IRepository.cs" />
+    <Compile Include="Models\ActionType.cs" />
+    <Compile Include="Models\DetailsPageMessage.cs" />
+    <Compile Include="Models\DialogMessage.cs" />
+    <Compile Include="Models\FlyoutMessage.cs" />
+    <Compile Include="Models\IDbEntity.cs" />
+    <Compile Include="Models\CacheItem.cs" />
+    <Compile Include="Models\PageMessage.cs" />
+    <Compile Include="Models\SearchByMonthQuery.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
+    <Compile Include="Models\SearchResultMessage.cs" />
+    <Compile Include="Models\TextSearchQuery.cs" />
+    <Compile Include="Models\ViewModelMessage.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="ViewModels\AboutDialogViewModel.cs" />
+    <Compile Include="ViewModels\AirlineDirectionsViewModel.cs" />
+    <Compile Include="Fundamentals\Abstracts\BaseCollectionViewModel.Generic.cs" />
+    <Compile Include="ViewModels\CityDirectionsViewModel.cs" />
+    <Compile Include="ViewModels\Data\AirlineViewModel.cs" />
+    <Compile Include="ViewModels\CalendarTicketsViewModel.cs" />
+    <Compile Include="ViewModels\CheapTicketsViewModel.cs" />
+    <Compile Include="ViewModels\CountryListViewModel.cs" />
+    <Compile Include="ViewModels\Data\AirportViewModel.cs" />
+    <Compile Include="ViewModels\Data\CityViewModel.cs" />
+    <Compile Include="Fundamentals\Interfaces\IHyperlinkViewModel.cs" />
+    <Compile Include="ViewModels\Data\CountryViewModel.cs" />
+    <Compile Include="ViewModels\Data\TicketViewModel.cs" />
+    <Compile Include="ViewModels\DirectTicketsViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Data\OfferViewModel.cs" />
+    <Compile Include="ViewModels\MonthViewModel.cs" />
+    <Compile Include="ViewModels\SearchByMonthViewModel.cs" />
+    <Compile Include="ViewModels\SearchQueryViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\SimpleSearchViewModel.cs" />
+    <Compile Include="ViewModels\SpecialOffersViewModel.cs" />
+    <Compile Include="ViewModels\SplashScreenViewModel.cs" />
+    <Compile Include="ViewModels\TileViewModel.cs" />
+    <Compile Include="ViewModels\TokenDialogViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Pages\AirlineDirectionsView.xaml.cs">
+      <DependentUpon>AirlineDirectionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AirportListViewModel.cs" />
+    <Compile Include="Views\Pages\AirportListView.xaml.cs">
+      <DependentUpon>AirportListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CalendarTicketsView.xaml.cs">
+      <DependentUpon>CalendarTicketsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CheapTicketsView.xaml.cs">
+      <DependentUpon>CheapTicketsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CityDirectionsView.xaml.cs">
+      <DependentUpon>CityDirectionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CountryListView.xaml.cs">
+      <DependentUpon>CountryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DirectTicketsView.xaml.cs">
+      <DependentUpon>DirectTicketsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SpecialOffersView.xaml.cs">
+      <DependentUpon>SpecialOffersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchByMonthView.xaml.cs">
+      <DependentUpon>SearchByMonthView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SimpleSearchView.xaml.cs">
+      <DependentUpon>SimpleSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\ControlTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Dialogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Metro.Calendar.Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\AirlineDirectionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AirportListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CalendarTicketsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CheapTicketsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CityDirectionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CountryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DirectTicketsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SpecialOffersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchByMonthView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SimpleSearchView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelpayoutsAPI.Library\TravelpayoutsAPI.Library.csproj">
+      <Project>{d7843679-5f30-48e7-b317-79f5248a955f}</Project>
+      <Name>TravelpayoutsAPI.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\airline_logos\2B.png" />
+    <Resource Include="Resources\airline_logos\2I.png" />
+    <Resource Include="Resources\airline_logos\2K.png" />
+    <Resource Include="Resources\airline_logos\2M.png" />
+    <Resource Include="Resources\airline_logos\3K.png" />
+    <Resource Include="Resources\airline_logos\3R.png" />
+    <Resource Include="Resources\airline_logos\4G.png" />
+    <Resource Include="Resources\airline_logos\4J.png" />
+    <Resource Include="Resources\airline_logos\4Q.png" />
+    <Resource Include="Resources\airline_logos\4U.png" />
+    <Resource Include="Resources\airline_logos\5H.png" />
+    <Resource Include="Resources\airline_logos\5J.png" />
+    <Resource Include="Resources\airline_logos\5N.png" />
+    <Resource Include="Resources\airline_logos\6E.png" />
+    <Resource Include="Resources\airline_logos\6H.png" />
+    <Resource Include="Resources\airline_logos\6R.png" />
+    <Resource Include="Resources\airline_logos\6W.png" />
+    <Resource Include="Resources\airline_logos\7J.png" />
+    <Resource Include="Resources\airline_logos\7K.png" />
+    <Resource Include="Resources\airline_logos\7R.png" />
+    <Resource Include="Resources\airline_logos\8M.png" />
+    <Resource Include="Resources\airline_logos\9B.png" />
+    <Resource Include="Resources\airline_logos\9F.png" />
+    <Resource Include="Resources\airline_logos\9H.png" />
+    <Resource Include="Resources\airline_logos\9U.png" />
+    <Resource Include="Resources\airline_logos\9W.png" />
+    <Resource Include="Resources\airline_logos\A3.png" />
+    <Resource Include="Resources\airline_logos\A9.png" />
+    <Resource Include="Resources\airline_logos\AA.png" />
+    <Resource Include="Resources\airline_logos\AB.png" />
+    <Resource Include="Resources\airline_logos\AC.png" />
+    <Resource Include="Resources\airline_logos\AF.png" />
+    <Resource Include="Resources\airline_logos\AH.png" />
+    <Resource Include="Resources\airline_logos\AI.png" />
+    <Resource Include="Resources\airline_logos\AK.png" />
+    <Resource Include="Resources\airline_logos\AM.png" />
+    <Resource Include="Resources\airline_logos\AP.png" />
+    <Resource Include="Resources\airline_logos\AR.png" />
+    <Resource Include="Resources\airline_logos\AS.png" />
+    <Resource Include="Resources\airline_logos\AT.png" />
+    <Resource Include="Resources\airline_logos\AV.png" />
+    <Resource Include="Resources\airline_logos\AY.png" />
+    <Resource Include="Resources\airline_logos\AZ.png" />
+    <Resource Include="Resources\airline_logos\B2.png" />
+    <Resource Include="Resources\airline_logos\B6.png" />
+    <Resource Include="Resources\airline_logos\BA.png" />
+    <Resource Include="Resources\airline_logos\BD.png" />
+    <Resource Include="Resources\airline_logos\BE.png" />
+    <Resource Include="Resources\airline_logos\BI.png" />
+    <Resource Include="Resources\airline_logos\BJ.png" />
+    <Resource Include="Resources\airline_logos\BR.png" />
+    <Resource Include="Resources\airline_logos\BT.png" />
+    <Resource Include="Resources\airline_logos\BV.png" />
+    <Resource Include="Resources\airline_logos\BW.png" />
+    <Resource Include="Resources\airline_logos\CA.png" />
+    <Resource Include="Resources\airline_logos\CI.png" />
+    <Resource Include="Resources\airline_logos\CM.png" />
+    <Resource Include="Resources\airline_logos\CU.png" />
+    <Resource Include="Resources\airline_logos\CX.png" />
+    <Resource Include="Resources\airline_logos\CY.png" />
+    <Resource Include="Resources\airline_logos\CZ.png" />
+    <Resource Include="Resources\airline_logos\D2.png" />
+    <Resource Include="Resources\airline_logos\D7.png" />
+    <Resource Include="Resources\airline_logos\D9.png" />
+    <Resource Include="Resources\airline_logos\DE.png" />
+    <Resource Include="Resources\airline_logos\DG.png" />
+    <Resource Include="Resources\airline_logos\DJ.png" />
+    <Resource Include="Resources\airline_logos\DL.png" />
+    <Resource Include="Resources\airline_logos\DV.png" />
+    <Resource Include="Resources\airline_logos\DX.png" />
+    <Resource Include="Resources\airline_logos\DY.png" />
+    <Resource Include="Resources\airline_logos\EG.png" />
+    <Resource Include="Resources\airline_logos\EI.png" />
+    <Resource Include="Resources\airline_logos\EK.png" />
+    <Resource Include="Resources\airline_logos\EL.png" />
+    <Resource Include="Resources\airline_logos\EN.png" />
+    <Resource Include="Resources\airline_logos\EQ.png" />
+    <Resource Include="Resources\airline_logos\ET.png" />
+    <Resource Include="Resources\airline_logos\EV.png" />
+    <Resource Include="Resources\airline_logos\EY.png" />
+    <Resource Include="Resources\airline_logos\F7.png" />
+    <Resource Include="Resources\airline_logos\F9.png" />
+    <Resource Include="Resources\airline_logos\FB.png" />
+    <Resource Include="Resources\airline_logos\FD.png" />
+    <Resource Include="Resources\airline_logos\FI.png" />
+    <Resource Include="Resources\airline_logos\FJ.png" />
+    <Resource Include="Resources\airline_logos\FL.png" />
+    <Resource Include="Resources\airline_logos\FM.png" />
+    <Resource Include="Resources\airline_logos\FR.png" />
+    <Resource Include="Resources\airline_logos\FV.png" />
+    <Resource Include="Resources\airline_logos\FZ.png" />
+    <Resource Include="Resources\airline_logos\G3.png" />
+    <Resource Include="Resources\airline_logos\G4.png" />
+    <Resource Include="Resources\airline_logos\G8.png" />
+    <Resource Include="Resources\airline_logos\GA.png" />
+    <Resource Include="Resources\airline_logos\GF.png" />
+    <Resource Include="Resources\airline_logos\GH.png" />
+    <Resource Include="Resources\airline_logos\GW.png" />
+    <Resource Include="Resources\airline_logos\H2.png" />
+    <Resource Include="Resources\airline_logos\HA.png" />
+    <Resource Include="Resources\airline_logos\HG.png" />
+    <Resource Include="Resources\airline_logos\HM.png" />
+    <Resource Include="Resources\airline_logos\HO.png" />
+    <Resource Include="Resources\airline_logos\HR.png" />
+    <Resource Include="Resources\airline_logos\HU.png" />
+    <Resource Include="Resources\airline_logos\HV.png" />
+    <Resource Include="Resources\airline_logos\HX.png" />
+    <Resource Include="Resources\airline_logos\HY.png" />
+    <Resource Include="Resources\airline_logos\HZ.png" />
+    <Resource Include="Resources\airline_logos\I4.png" />
+    <Resource Include="Resources\airline_logos\I8.png" />
+    <Resource Include="Resources\airline_logos\IB.png" />
+    <Resource Include="Resources\airline_logos\IG.png" />
+    <Resource Include="Resources\airline_logos\IO.png" />
+    <Resource Include="Resources\airline_logos\IT.png" />
+    <Resource Include="Resources\airline_logos\IY.png" />
+    <Resource Include="Resources\airline_logos\IZ.png" />
+    <Resource Include="Resources\airline_logos\J2.png" />
+    <Resource Include="Resources\airline_logos\J8.png" />
+    <Resource Include="Resources\airline_logos\JJ.png" />
+    <Resource Include="Resources\airline_logos\JL.png" />
+    <Resource Include="Resources\airline_logos\JP.png" />
+    <Resource Include="Resources\airline_logos\JQ.png" />
+    <Resource Include="Resources\airline_logos\JT.png" />
+    <Resource Include="Resources\airline_logos\JU.png" />
+    <Resource Include="Resources\airline_logos\K2.png" />
+    <Resource Include="Resources\airline_logos\K6.png" />
+    <Resource Include="Resources\airline_logos\KA.png" />
+    <Resource Include="Resources\airline_logos\KC.png" />
+    <Resource Include="Resources\airline_logos\KE.png" />
+    <Resource Include="Resources\airline_logos\KF.png" />
+    <Resource Include="Resources\airline_logos\KK.png" />
+    <Resource Include="Resources\airline_logos\KL.png" />
+    <Resource Include="Resources\airline_logos\KM.png" />
+    <Resource Include="Resources\airline_logos\KQ.png" />
+    <Resource Include="Resources\airline_logos\KR.png" />
+    <Resource Include="Resources\airline_logos\KU.png" />
+    <Resource Include="Resources\airline_logos\KX.png" />
+    <Resource Include="Resources\airline_logos\LA.png" />
+    <Resource Include="Resources\airline_logos\LG.png" />
+    <Resource Include="Resources\airline_logos\LH.png" />
+    <Resource Include="Resources\airline_logos\LO.png" />
+    <Resource Include="Resources\airline_logos\LR.png" />
+    <Resource Include="Resources\airline_logos\LX.png" />
+    <Resource Include="Resources\airline_logos\LY.png" />
+    <Resource Include="Resources\airline_logos\M9.png" />
+    <Resource Include="Resources\airline_logos\MD.png" />
+    <Resource Include="Resources\airline_logos\ME.png" />
+    <Resource Include="Resources\airline_logos\MF.png" />
+    <Resource Include="Resources\airline_logos\MH.png" />
+    <Resource Include="Resources\airline_logos\MI.png" />
+    <Resource Include="Resources\airline_logos\MJ.png" />
+    <Resource Include="Resources\airline_logos\MK.png" />
+    <Resource Include="Resources\airline_logos\MS.png" />
+    <Resource Include="Resources\airline_logos\MU.png" />
+    <Resource Include="Resources\airline_logos\MZ.png" />
+    <Resource Include="Resources\airline_logos\NG.png" />
+    <Resource Include="Resources\airline_logos\NH.png" />
+    <Resource Include="Resources\airline_logos\NK.png" />
+    <Resource Include="Resources\airline_logos\NN.png" />
+    <Resource Include="Resources\airline_logos\NT.png" />
+    <Resource Include="Resources\airline_logos\NX.png" />
+    <Resource Include="Resources\airline_logos\NZ.png" />
+    <Resource Include="Resources\airline_logos\OA.png" />
+    <Resource Include="Resources\airline_logos\OG.png" />
+    <Resource Include="Resources\airline_logos\OK.png" />
+    <Resource Include="Resources\airline_logos\OM.png" />
+    <Resource Include="Resources\airline_logos\OS.png" />
+    <Resource Include="Resources\airline_logos\OU.png" />
+    <Resource Include="Resources\airline_logos\OV.png" />
+    <Resource Include="Resources\airline_logos\OZ.png" />
+    <Resource Include="Resources\airline_logos\PC.png" />
+    <Resource Include="Resources\airline_logos\PG.png" />
+    <Resource Include="Resources\airline_logos\PK.png" />
+    <Resource Include="Resources\airline_logos\PR.png" />
+    <Resource Include="Resources\airline_logos\PS.png" />
+    <Resource Include="Resources\airline_logos\PW.png" />
+    <Resource Include="Resources\airline_logos\QF.png" />
+    <Resource Include="Resources\airline_logos\QG.png" />
+    <Resource Include="Resources\airline_logos\QH.png" />
+    <Resource Include="Resources\airline_logos\QR.png" />
+    <Resource Include="Resources\airline_logos\QS.png" />
+    <Resource Include="Resources\airline_logos\QU.png" />
+    <Resource Include="Resources\airline_logos\QV.png" />
+    <Resource Include="Resources\airline_logos\QZ.png" />
+    <Resource Include="Resources\airline_logos\R2.png" />
+    <Resource Include="Resources\airline_logos\R3.png" />
+    <Resource Include="Resources\airline_logos\RB.png" />
+    <Resource Include="Resources\airline_logos\RC.png" />
+    <Resource Include="Resources\airline_logos\RI.png" />
+    <Resource Include="Resources\airline_logos\RJ.png" />
+    <Resource Include="Resources\airline_logos\RO.png" />
+    <Resource Include="Resources\airline_logos\RP.png" />
+    <Resource Include="Resources\airline_logos\S2.png" />
+    <Resource Include="Resources\airline_logos\S4.png" />
+    <Resource Include="Resources\airline_logos\S7.png" />
+    <Resource Include="Resources\airline_logos\SA.png" />
+    <Resource Include="Resources\airline_logos\SG.png" />
+    <Resource Include="Resources\airline_logos\SK.png" />
+    <Resource Include="Resources\airline_logos\SN.png" />
+    <Resource Include="Resources\airline_logos\SQ.png" />
+    <Resource Include="Resources\airline_logos\SS.png" />
+    <Resource Include="Resources\airline_logos\SU.png" />
+    <Resource Include="Resources\airline_logos\SV.png" />
+    <Resource Include="Resources\airline_logos\SY.png" />
+    <Resource Include="Resources\airline_logos\SZ.png" />
+    <Resource Include="Resources\airline_logos\T9.png" />
+    <Resource Include="Resources\airline_logos\TA.png" />
+    <Resource Include="Resources\airline_logos\TF.png" />
+    <Resource Include="Resources\airline_logos\TG.png" />
+    <Resource Include="Resources\airline_logos\TK.png" />
+    <Resource Include="Resources\airline_logos\TN.png" />
+    <Resource Include="Resources\airline_logos\TP.png" />
+    <Resource Include="Resources\airline_logos\TR.png" />
+    <Resource Include="Resources\airline_logos\TS.png" />
+    <Resource Include="Resources\airline_logos\TU.png" />
+    <Resource Include="Resources\airline_logos\TX.png" />
+    <Resource Include="Resources\airline_logos\TZ.png" />
+    <Resource Include="Resources\airline_logos\U2.png" />
+    <Resource Include="Resources\airline_logos\U6.png" />
+    <Resource Include="Resources\airline_logos\U8.png" />
+    <Resource Include="Resources\airline_logos\U9.png" />
+    <Resource Include="Resources\airline_logos\UA.png" />
+    <Resource Include="Resources\airline_logos\UL.png" />
+    <Resource Include="Resources\airline_logos\UN.png" />
+    <Resource Include="Resources\airline_logos\UO.png" />
+    <Resource Include="Resources\airline_logos\UP.png" />
+    <Resource Include="Resources\airline_logos\UR.png" />
+    <Resource Include="Resources\airline_logos\US.png" />
+    <Resource Include="Resources\airline_logos\UT.png" />
+    <Resource Include="Resources\airline_logos\UU.png" />
+    <Resource Include="Resources\airline_logos\UX.png" />
+    <Resource Include="Resources\airline_logos\V0.png" />
+    <Resource Include="Resources\airline_logos\V3.png" />
+    <Resource Include="Resources\airline_logos\VA.png" />
+    <Resource Include="Resources\airline_logos\VF.png" />
+    <Resource Include="Resources\airline_logos\VN.png" />
+    <Resource Include="Resources\airline_logos\VO.png" />
+    <Resource Include="Resources\airline_logos\VR.png" />
+    <Resource Include="Resources\airline_logos\VS.png" />
+    <Resource Include="Resources\airline_logos\VT.png" />
+    <Resource Include="Resources\airline_logos\VV.png" />
+    <Resource Include="Resources\airline_logos\VX.png" />
+    <Resource Include="Resources\airline_logos\VY.png" />
+    <Resource Include="Resources\airline_logos\W3.png" />
+    <Resource Include="Resources\airline_logos\W6.png" />
+    <Resource Include="Resources\airline_logos\WB.png" />
+    <Resource Include="Resources\airline_logos\WF.png" />
+    <Resource Include="Resources\airline_logos\WN.png" />
+    <Resource Include="Resources\airline_logos\WP.png" />
+    <Resource Include="Resources\airline_logos\WS.png" />
+    <Resource Include="Resources\airline_logos\WU.png" />
+    <Resource Include="Resources\airline_logos\WY.png" />
+    <Resource Include="Resources\airline_logos\WZ.png" />
+    <Resource Include="Resources\airline_logos\XF.png" />
+    <Resource Include="Resources\airline_logos\XL.png" />
+    <Resource Include="Resources\airline_logos\Y7.png" />
+    <Resource Include="Resources\airline_logos\YC.png" />
+    <Resource Include="Resources\airline_logos\YG.png" />
+    <Resource Include="Resources\airline_logos\YK.png" />
+    <Resource Include="Resources\airline_logos\YM.png" />
+    <Resource Include="Resources\airline_logos\YO.png" />
+    <Resource Include="Resources\airline_logos\YQ.png" />
+    <Resource Include="Resources\airline_logos\YV.png" />
+    <Resource Include="Resources\airline_logos\Z6.png" />
+    <Resource Include="Resources\airline_logos\ZG.png" />
+    <Resource Include="Resources\airline_logos\ZH.png" />
+    <Resource Include="Resources\airline_logos\ZI.png" />
+    <Resource Include="Resources\airline_logos\ZU.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\packages\sqlite.redist.3.8.4.2\build\native\sqlite.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sqlite.redist.3.8.4.2\build\native\sqlite.redist.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(PlatformName)==x64 (
+  xcopy /y "$(SolutionDir)packages\sqlite.redist.3.8.4.2\build\native\bin\$(PlatformName)\Release\sqlite3.dll" "$(ProjectDir)$(OutDir)"
+) else (
+   xcopy /y "$(SolutionDir)packages\sqlite.redist.3.8.4.2\build\native\bin\Win32\Release\sqlite3.dll" "$(ProjectDir)$(OutDir)"
+)</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\sqlite.redist.3.8.4.2\build\native\sqlite.redist.targets" Condition="Exists('..\packages\sqlite.redist.3.8.4.2\build\native\sqlite.redist.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

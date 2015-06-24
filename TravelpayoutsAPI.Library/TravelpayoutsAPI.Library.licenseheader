@@ -1,0 +1,36 @@
+extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+//*********************************************************
+//
+// Copyright (c) 2015 nikitadev. All rights reserved.
+//
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+extensions: .aspx .ascx
+<%-- 
+
+Copyright (c) 2015 nikitadev. All rights reserved.
+
+THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+
+--%>
+extensions: .vb
+'Sample license text.
+extensions:  .xml .config .xsd
+<!--
+
+Copyright (c) 2015 nikitadev. All rights reserved.
+
+THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+
+-->
