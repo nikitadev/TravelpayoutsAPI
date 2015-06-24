@@ -70,7 +70,7 @@ namespace AviaTicketsWpfApplication.Views
                                 return;
 
                             _currentDialog = (BaseMetroDialog)App.Current.Resources[obj.DialogTemplateKey];
-                            _currentDialog.DataContext = obj.DlgType.Equals("TokenDialogKey")
+                            _currentDialog.DataContext = obj.DlgType == DialogType.Login
                                 ? viewModelLocator.TokenDialog 
                                 : viewModelLocator.AboutDialog;
 
