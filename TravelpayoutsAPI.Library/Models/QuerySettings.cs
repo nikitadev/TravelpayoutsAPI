@@ -69,8 +69,6 @@ namespace TravelpayoutsAPI.Library.Models
 		public TripClassMode? TripClass { get; set; }
 		public int? TripDuration { get; set; }
 
-        
-
 		public override string ToString()
 		{
 			var builder = new StringBuilder();
@@ -101,10 +99,10 @@ namespace TravelpayoutsAPI.Library.Models
 				builder.Append(String.Concat("&show_to_affiliates=", IsShowToAffiliates));
 
 			if (DepartDate != null)
-				builder.Append(String.Concat("&depart_date=", DepartDate));
+                builder.Append(String.Format("&depart_date={0:yyyy-MM-dd}", DepartDate));
 
 			if (ReturnDate != null)
-				builder.Append(String.Concat("&return_date=", ReturnDate));
+                builder.Append(String.Format("&return_date={0:yyyy-MM-dd}", ReturnDate));
 
 			if (!String.IsNullOrEmpty(AirlineCode))
 			{
@@ -152,9 +150,9 @@ namespace TravelpayoutsAPI.Library.Models
 				builder.Append(String.Concat("&sorting=", sortValue));
 			}
 
-			if (TripClass != null)
+			if (TripClass.HasValue)
 			{
-				builder.Append(String.Concat("&trip_class=", (int)TripClass));
+				builder.Append(String.Concat("&trip_class=", TripClass.Value));
 			}
 
 			if (TripDuration != null)
