@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelpayoutsAPI.Library", "TravelpayoutsAPI.Library\TravelpayoutsAPI.Library.csproj", "{D7843679-5F30-48E7-B317-79F5248A955F}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTicketsWpfApplication", "AviaTiketsWpfApplication\AviaTicketsWpfApplication.csproj", "{B9412222-62C6-47B9-A13A-74C4F694AD0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaTicketsStoreApp", "AviaTiketsStoreApp\AviaTicketsStoreApp.csproj", "{75CCCE90-11AA-405D-A128-FEA952708D15}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{AD8AEA23-75DA-4D83-B719-1CD7B552F3AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
