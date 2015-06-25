@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <configSections>
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="AviaTicketsWpfApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+        </sectionGroup>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="AviaTicketsWpfApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6"/>
+    </startup>
+    <applicationSettings>
+        <AviaTicketsWpfApplication.Properties.Settings>
+            <setting name="AirlineIconName" serializeAs="String">
+                <value>appbar_plane_rotated_45</value>
+            </setting>
+            <setting name="AirportsIconName" serializeAs="String">
+                <value>appbar_tardis</value>
+            </setting>
+            <setting name="CountriesIconName" serializeAs="String">
+                <value>appbar_flag_wavy</value>
+            </setting>
+            <setting name="CitiesIconName" serializeAs="String">
+                <value>appbar_city</value>
+            </setting>
+            <setting name="SpecialOfferIconName" serializeAs="String">
+                <value>appbar_forsale</value>
+            </setting>
+            <setting name="CalendarTicketsIconName" serializeAs="String">
+                <value>appbar_calendar_future</value>
+            </setting>
+            <setting name="DirectTicketsIconName" serializeAs="String">
+                <value>appbar_return</value>
+            </setting>
+            <setting name="ChipTicketsIconName" serializeAs="String">
+                <value>appbar_coupon</value>
+            </setting>
+        </AviaTicketsWpfApplication.Properties.Settings>
+    </applicationSettings>
+    <userSettings>
+        <AviaTicketsWpfApplication.Properties.Settings>
+            <setting name="MainUri" serializeAs="String">
+                <value>https://www.travelpayouts.com/</value>
+            </setting>
+            <setting name="TestToken" serializeAs="String">
+                <value>321d6a221f8926b5ec41ae89a3b2ae7b</value>
+            </setting>
+        </AviaTicketsWpfApplication.Properties.Settings>
+    </userSettings>
+</configuration>
