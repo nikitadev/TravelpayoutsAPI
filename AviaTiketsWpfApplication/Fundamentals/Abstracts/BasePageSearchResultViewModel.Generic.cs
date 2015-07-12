@@ -1,10 +1,9 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using GalaSoft.MvvmLight.Threading;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
@@ -32,7 +31,7 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
 
         protected void SendError(string error)
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<SearchResultMessage>(new SearchResultMessage { Message = error }));
+            MessengerInstance.Send(new SearchResultMessage { Message = error });
         }
 
         protected async Task SearchQueryHandler(ISearchQuery searchQuery)
@@ -55,7 +54,7 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             IsPageMessageVisible = !IsVisibleData;
             IsProgress = false;
 
-            MessengerInstance.Send<SearchResultMessage>(new SearchResultMessage { IsFinished = true });          
+            MessengerInstance.Send(new SearchResultMessage { IsFinished = true });          
         }
 
         /// <summary>

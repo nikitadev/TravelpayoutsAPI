@@ -1,9 +1,8 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+﻿using System;
+using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Threading;
-using System;
-using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
@@ -81,7 +80,7 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
         {
             OnSearchCommandHandler();
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<ISearchQuery>(_searchQuery, MessengerTokens.Search));
+            MessengerInstance.Send<ISearchQuery>(_searchQuery, MessengerTokens.Search);
         }
 
         protected virtual void OnSearchCommandHandler()

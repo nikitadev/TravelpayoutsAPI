@@ -1,16 +1,15 @@
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Navigation;
 using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
-using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Navigation;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -277,21 +276,19 @@ namespace AviaTicketsWpfApplication.ViewModels
 
                 if (dicParams.Count > 0)
                 {
-                    DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<DetailsPageMessage>(new DetailsPageMessage { Parametrs = dicParams }));
+                    MessengerInstance.Send(new DetailsPageMessage { Parametrs = dicParams });
                 }
             }
         }
 
         private void AboutCommandHandler()
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                MessengerInstance.Send(new DialogMessage
-                {
-                    DlgType = DialogType.About,
-                    ActType = ActionType.Show,
-                    DialogTemplateKey = "AboutDialogKey"
-                }));
-            //DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send(new DialogMessage { DlgType = DialogType.About, ActType = ActionType.Show }));
+            MessengerInstance.Send(new DialogMessage
+            {
+                DlgType = DialogType.About,
+                ActType = ActionType.Show,
+                DialogTemplateKey = "AboutDialogKey"
+            });
         }
 
         private async Task ViewModelMessageHandler(ViewModelMessage message)
@@ -301,12 +298,9 @@ namespace AviaTicketsWpfApplication.ViewModels
                 await CallEnterTokenDialogAsync();
             }
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                IsProgressVisible = message.IsShowingProgress;
-                IsFlyoutOpen = message.IsShowedSearhPanel;
-                IsShowSearchButtonEnabled = message.IsSearhEnabled;
-            });
+            IsProgressVisible = message.IsShowingProgress;
+            IsFlyoutOpen = message.IsShowedSearhPanel;
+            IsShowSearchButtonEnabled = message.IsSearhEnabled;
         }
 
         public async Task CallEnterTokenDialogAsync()
@@ -315,13 +309,12 @@ namespace AviaTicketsWpfApplication.ViewModels
             if (!String.IsNullOrEmpty(token))
                 return;
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                MessengerInstance.Send(new DialogMessage 
-                { 
-                    DlgType = DialogType.Login, 
-                    ActType = ActionType.Show, 
-                    DialogTemplateKey = "TokenDialogKey"
-                }));
+            MessengerInstance.Send(new DialogMessage
+            {
+                DlgType = DialogType.Login,
+                ActType = ActionType.Show,
+                DialogTemplateKey = "TokenDialogKey"
+            });
         }
     }
 }

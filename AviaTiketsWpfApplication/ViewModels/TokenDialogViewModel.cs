@@ -74,7 +74,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
         private void CancelHandler()
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<DialogMessage>(new DialogMessage { ActType = ActionType.Close }));
+            MessengerInstance.Send<DialogMessage>(new DialogMessage { ActType = ActionType.Close });
         }
 
         private async Task AcceptCommandHandlerAsync()
@@ -90,7 +90,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
             await _repositoryCashe.InsertAsync(item);
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send(new DialogMessage { DlgType = DialogType.Login, ActType = ActionType.Hide }));
+            MessengerInstance.Send(new DialogMessage { DlgType = DialogType.Login, ActType = ActionType.Hide });
         }
 
         public string this[string columnName]

@@ -1,14 +1,11 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Threading;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Linq;
-using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Properties;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
 using TravelpayoutsAPI.Library.Models.Data;
@@ -36,22 +33,22 @@ namespace AviaTicketsWpfApplication.ViewModels
         protected override async Task InitializeAsync()
         {
             var message = new ViewModelMessage { IsSearhEnabled = true, IsShowedSearhPanel = true, IsShowingProgress = true };
-
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            var flyoutMsg = new FlyoutMessage
             {
-                MessengerInstance.Send<FlyoutMessage>(new FlyoutMessage { TypeViewModel = typeof(SearchViewModel), Header = "Search tickets", IsRightPosition = true });
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+                TypeViewModel = typeof(SearchViewModel),
+                Header = Resources.Search,
+                IsRightPosition = true
+            };
+
+            MessengerInstance.Send(flyoutMsg);
+            MessengerInstance.Send(message);
 
             _cities = await _cacheService.GetAsync<IEnumerable<City>>(DataNames.Cities);
 
             await base.InitializeAsync();
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                message.IsShowingProgress = false;
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            message.IsShowingProgress = false;
+            MessengerInstance.Send(message);
         }
 
         protected override async Task<IEnumerable<Ticket>> UpdateCollection(ISearchQuery searchQuery)
@@ -59,7 +56,7 @@ namespace AviaTicketsWpfApplication.ViewModels
             var query = searchQuery as SearchQuery;
             if (query == null)
             {
-                SendError("Error in parametrs.");
+                SendError(Resources.ErrorParams);
                 return null;
             }
 
@@ -91,9 +88,9 @@ namespace AviaTicketsWpfApplication.ViewModels
 
                 return list;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
-                SendError("Not found. Try to change criteria search and found again.");
+                SendError(Resources.Error404);
             }
 
             return null;

@@ -1,17 +1,15 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Threading;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using AviaTicketsWpfApplication.Properties;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
-using System.Globalization;
-using AviaTicketsWpfApplication.Properties;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -41,16 +39,13 @@ namespace AviaTicketsWpfApplication.ViewModels
                 IsRightPosition = true 
             };
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                MessengerInstance.Send<FlyoutMessage>(flyoutMsg);
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            MessengerInstance.Send(flyoutMsg);
+            MessengerInstance.Send(message);
 
             await base.InitializeAsync();
 
             message.IsShowingProgress = false;
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<ViewModelMessage>(message));
+            MessengerInstance.Send(message);
         }
 
         protected override async Task<IEnumerable<Tuple<string, double>>> UpdateCollection(ISearchQuery searchQuery)
@@ -86,7 +81,7 @@ namespace AviaTicketsWpfApplication.ViewModels
                     
                 return list;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 SendError(Resources.Error404);
             }

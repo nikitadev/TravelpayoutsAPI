@@ -1,14 +1,13 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using AviaTicketsWpfApplication.Properties;
-using AviaTicketsWpfApplication.ViewModels.Data;
-using GalaSoft.MvvmLight.Threading;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using AviaTicketsWpfApplication.Properties;
+using AviaTicketsWpfApplication.ViewModels.Data;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models.Data;
 
@@ -42,11 +41,8 @@ namespace AviaTicketsWpfApplication.ViewModels
                 Header = String.Concat(Resources.Search, " ", Resources.Airlines),
                 IsRightPosition = true };
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() => 
-            {
-                MessengerInstance.Send<FlyoutMessage>(flyoutMsg);
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            MessengerInstance.Send(flyoutMsg);
+            MessengerInstance.Send(message);
 
             _cities = await _cacheService.GetAsync<IEnumerable<City>>(DataNames.Cities);
             _airlines = await _cacheService.GetAsync<IEnumerable<Airline>>(DataNames.Airlines);
@@ -54,7 +50,7 @@ namespace AviaTicketsWpfApplication.ViewModels
             await base.InitializeAsync();
 
             message.IsShowingProgress = false;
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<ViewModelMessage>(message));
+            MessengerInstance.Send(message);
         }
 
         protected override async Task<IEnumerable<Tuple<string, int>>> UpdateCollection(ISearchQuery searchQuery)
@@ -87,15 +83,12 @@ namespace AviaTicketsWpfApplication.ViewModels
                 var airlines = _airlines.Where(a => a.Name.ToLower().Contains(text.ToLower()));
                 if (airlines.Count() > 1)
                 {
-                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                    {
-                        MessengerInstance.Send<SearchResultMessage>(
+                    MessengerInstance.Send(
                             new SearchResultMessage
                             {
                                 Message = Resources.ChooseAirline,
                                 ListResult = airlines.Select(a => new AirlineViewModel(a)).OfType<IHyperlinkViewModel>()
                             });
-                    });
 
                     return null;
                 }

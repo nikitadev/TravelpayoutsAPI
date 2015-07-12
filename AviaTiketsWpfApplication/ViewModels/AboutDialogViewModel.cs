@@ -1,7 +1,6 @@
 ﻿using AviaTicketsWpfApplication.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Threading;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -25,8 +24,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
         private void AcceptCommandHandler()
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() => 
-                MessengerInstance.Send(new DialogMessage { DlgType = DialogType.About, ActType = ActionType.Hide }));
+            MessengerInstance.Send(new DialogMessage { DlgType = DialogType.About, ActType = ActionType.Hide });
         }
     }
 }

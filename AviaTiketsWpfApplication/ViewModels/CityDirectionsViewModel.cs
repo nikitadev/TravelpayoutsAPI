@@ -1,14 +1,13 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using AviaTicketsWpfApplication.Properties;
-using AviaTicketsWpfApplication.ViewModels.Data;
-using GalaSoft.MvvmLight.Threading;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using AviaTicketsWpfApplication.Properties;
+using AviaTicketsWpfApplication.ViewModels.Data;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models.Data;
 
@@ -42,18 +41,15 @@ namespace AviaTicketsWpfApplication.ViewModels
                 IsRightPosition = true 
             };
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                MessengerInstance.Send<FlyoutMessage>(flyoutMsg);
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            MessengerInstance.Send(flyoutMsg);
+            MessengerInstance.Send(message);
 
             _cities = await _cacheService.GetAsync<IEnumerable<City>>(DataNames.Cities);
 
             await base.InitializeAsync();
 
             message.IsShowingProgress = false;
-            DispatcherHelper.CheckBeginInvokeOnUI(() => MessengerInstance.Send<ViewModelMessage>(message));
+            MessengerInstance.Send(message);
         }
 
         protected override async Task<IEnumerable<Tuple<string, double>>> UpdateCollection(ISearchQuery searchQuery)
@@ -86,7 +82,7 @@ namespace AviaTicketsWpfApplication.ViewModels
                 var cities = _cities.Where(a => (a.Name.ToLower().Contains(text.ToLower()) || a.CultureName.ToLower().Contains(text.ToLower())));
                 if (cities.Count() > 1)
                 {
-                    MessengerInstance.Send<SearchResultMessage>(
+                    MessengerInstance.Send(
                         new SearchResultMessage
                         {
                             Message = Resources.ChooseСity,
@@ -112,7 +108,7 @@ namespace AviaTicketsWpfApplication.ViewModels
                 var list = await _searchTicketApiFactory.PopularRoutes.GetPopularRoutesFromCity(token, city.Code);
                 return list.Join(_cities, t => t.Destination, c => c.Code, (t, c) => new Tuple<string, double>(c.CultureName, t.Price));
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 SendError(Resources.Error404);
             }

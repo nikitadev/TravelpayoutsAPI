@@ -36,22 +36,16 @@ namespace AviaTicketsWpfApplication.ViewModels
         {
             var message = new ViewModelMessage { IsSearhEnabled = true, IsShowedSearhPanel = true, IsShowingProgress = true };
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                MessengerInstance.Send<FlyoutMessage>(
+            MessengerInstance.Send(
                     new FlyoutMessage { TypeViewModel = typeof(SearchViewModel), Header = "Search tickets", IsRightPosition = true });
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            MessengerInstance.Send(message);
 
             _cities = await _cacheService.GetAsync<List<City>>(DataNames.Cities);
 
             await base.InitializeAsync();
 
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-                message.IsShowingProgress = false;
-                MessengerInstance.Send<ViewModelMessage>(message);
-            });
+            message.IsShowingProgress = false;
+            MessengerInstance.Send(message);
         }
 
         protected override async Task<IEnumerable<Ticket>> UpdateCollection(ISearchQuery searchQuery)
@@ -90,7 +84,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
                 return list;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 SendError(Resources.Error404);
             }
