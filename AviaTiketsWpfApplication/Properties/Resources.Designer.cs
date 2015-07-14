@@ -439,7 +439,7 @@ namespace AviaTicketsWpfApplication.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This application shows the operation of some of the methods of the wrapper over.
+        ///   Looks up a localized string similar to This application demonstrate some of the methods of the wrapper over.
         /// </summary>
         public static string TextAbout1 {
             get {

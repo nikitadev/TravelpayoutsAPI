@@ -286,7 +286,7 @@
     <value>Airline tickets on sale: {0:dd.MM.yyyy} - {1:dd.MM.yyyy}</value>
   </data>
   <data name="TextAbout1" xml:space="preserve">
-    <value>This application shows the operation of some of the methods of the wrapper over</value>
+    <value>This application demonstrate some of the methods of the wrapper over</value>
   </data>
   <data name="TextAbout2" xml:space="preserve">
     <value>which provides access to a cheap tickets from</value>

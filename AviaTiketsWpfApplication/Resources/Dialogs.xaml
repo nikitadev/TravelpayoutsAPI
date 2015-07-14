@@ -3,7 +3,8 @@
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:f="clr-namespace:AviaTicketsWpfApplication.Fundamentals"
                     xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-                    xmlns:properties="clr-namespace:AviaTicketsWpfApplication.Properties">
+                    xmlns:properties="clr-namespace:AviaTicketsWpfApplication.Properties"
+                    xmlns:deployment="clr-namespace:System.Configuration.Assemblies;assembly=mscorlib">
     
     <dialog:CustomDialog x:Key="TokenDialogKey"
                          Title="{x:Static properties:Resources.TitleTokenDlg}">
@@ -90,13 +91,25 @@
                                CommandParameter="https://github.com/nikitadev">github</Hyperlink>
                 </TextBlock>
             </Label>
-            <Button Grid.Row="3" 
-                    Width="100" 
-                    HorizontalAlignment="Right" 
-                    Margin="0, 0, 0, 10"
-                    Content="ok"     
-                    Style="{DynamicResource AccentedSquareButtonStyle}"
-                    Command="{Binding AcceptCommand}" />
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Left" Opacity="0.7">
+                    <TextBlock TextWrapping="WrapWithOverflow">
+                        <Run Text="ver. " />
+                        <Run Text="{Binding Version, Mode=OneTime}" />
+                    </TextBlock>
+                </Label>
+                <Button Grid.Column="1" 
+                        Width="100" 
+                        HorizontalAlignment="Right" 
+                        Margin="0, 0, 0, 10"
+                        Content="ok"     
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding AcceptCommand}" />
+            </Grid>
         </Grid>
     </dialog:CustomDialog>
 </ResourceDictionary>
