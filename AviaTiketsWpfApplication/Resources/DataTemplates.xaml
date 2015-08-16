@@ -4,11 +4,11 @@
                     xmlns:viewModels="clr-namespace:AviaTicketsWpfApplication.ViewModels"
                     xmlns:pages="clr-namespace:AviaTicketsWpfApplication.Views.Pages"
                     xmlns:f="clr-namespace:AviaTicketsWpfApplication.Fundamentals"
-                    xmlns:models="clr-namespace:TravelpayoutsAPI.Library.Models;assembly=TravelpayoutsAPI.Library"
+                    xmlns:monitor="clr-namespace:TravelpayoutsAPI.Library.Models.Monitor;assembly=TravelpayoutsAPI.Library"
                     xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
                     xmlns:properties="clr-namespace:AviaTicketsWpfApplication.Properties">
 
-    <DataTemplate x:Key="TicketDataTemplateItemKey" DataType="{x:Type models:Ticket}">
+    <DataTemplate x:Key="TicketDataTemplateItemKey" DataType="{x:Type monitor:Ticket}">
         <Border Background="{DynamicResource AccentColorBrush}" BorderBrush="Red" BorderThickness="1" Margin="0,10,5,10" Width="500">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
@@ -56,7 +56,7 @@
         </controls:Tile>
     </DataTemplate>
 
-    <DataTemplate x:Key="SpecOfferTemplateKey" DataType="{x:Type models:Offer}">
+    <DataTemplate x:Key="SpecOfferTemplateKey" DataType="{x:Type monitor:Offer}">
         <Grid Background="White" Margin="10" Width="650">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

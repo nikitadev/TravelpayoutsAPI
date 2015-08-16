@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using AviaTicketsStoreApp.Common;
 using AviaTicketsStoreApp.Model;
 
 namespace AviaTicketsStoreApp.ViewModel

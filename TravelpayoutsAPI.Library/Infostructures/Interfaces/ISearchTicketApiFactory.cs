@@ -1,19 +1,40 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
 {
     [ContractClass(typeof(SearchTicketApiFactoryContract))]
     public interface ISearchTicketApiFactory
     {
+        /// <summary>
+        /// Предоставляет доступ к данным о пользователе
+        /// </summary>
         IUserInfoProvider UserInfo { get; }
 
+        /// <summary>
+        /// Предоставляет данные
+        /// </summary>
         IDataInfoProvider DataInfo { get; }
 
+        /// <summary>
+        /// Предоставляет доступ к популярным маршрутам
+        /// </summary>
         IPopularRoutesProvider PopularRoutes { get; }
 
+        /// <summary>
+        /// Поиск билетов из кэша
+        /// </summary>
         ISearchTicketsProvider MainSearch { get; }
 
+        /// <summary>
+        /// Предоставляет упращёный поиск билетов из кэша
+        /// </summary>
         ISimpleSearchTicketsProvider SimpleSearch { get; }
+
+        /// <summary>
+        /// Предоставляет доступ к стандартному поиску
+        /// </summary>
+        IFlightSearchProvider FlightSearch { get; }
     }
 
     [ContractClassFor(typeof(ISearchTicketApiFactory))]
@@ -66,6 +87,16 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
                 Contract.Ensures(Contract.Result<ISimpleSearchTicketsProvider>() != null);
 
                 return default(ISimpleSearchTicketsProvider);
+            }
+        }
+
+        public IFlightSearchProvider FlightSearch
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<IFlightSearchProvider>() != null);
+
+                return default(IFlightSearchProvider);
             }
         }
     }

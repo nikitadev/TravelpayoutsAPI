@@ -20,7 +20,7 @@ namespace AviaTicketsWpfApplication.Views
         {
             InitializeComponent();
 
-            Closing += (s, e) => { e.Cancel = !_shutdown; DialogMessageHandleAsync(new DialogMessage { DlgType = DialogType.Close }); };
+            Closing += async (s, e) => { e.Cancel = !_shutdown; await DialogMessageHandleAsync(new DialogMessage { DlgType = DialogType.Close }); };
 
             mainFrame.NavigationService.Navigate(DataContext);
         }
@@ -33,7 +33,7 @@ namespace AviaTicketsWpfApplication.Views
             Messenger.Default.Register<FlyoutMessage>(this, FlyoutMessageHandler);
             Messenger.Default.Register<DialogMessage>(this, async (m) => await DialogMessageHandleAsync(m));
 
-            Messenger.Default.Send<ViewModelMessage>(new ViewModelMessage { IsInitialized = true });
+            Messenger.Default.Send(new ViewModelMessage { IsInitialized = true });
         }
 
         private void FlyoutMessageHandler(FlyoutMessage m)

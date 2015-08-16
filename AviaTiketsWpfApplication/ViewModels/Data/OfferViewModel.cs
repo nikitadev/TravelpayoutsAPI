@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
-using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels.Data
 {

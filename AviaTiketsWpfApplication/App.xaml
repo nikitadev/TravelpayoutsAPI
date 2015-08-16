@@ -21,7 +21,7 @@
                 <ResourceDictionary Source="pack://application:,,,/AviaTicketsWpfApplication;component/Resources/DataTemplates.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/AviaTicketsWpfApplication;component/Resources/Styles.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/AviaTicketsWpfApplication;component/Resources/ControlTemplates.xaml" />
-            </ResourceDictionary.MergedDictionaries>            
-		</ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

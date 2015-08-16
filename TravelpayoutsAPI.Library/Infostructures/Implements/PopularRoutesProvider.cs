@@ -13,11 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
-    public class PopularRoutesProvider : BaseApiProvider, IPopularRoutesProvider
+    public sealed class PopularRoutesProvider : BaseApiProvider, IPopularRoutesProvider
 	{
         public PopularRoutesProvider(IRequestManager requestManager)
             : base(requestManager)
@@ -31,7 +31,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<IEnumerable<Tuple<string, int>>> GetPopularAirlineRoutes(string token, string airlineCode, int limit)
 		{
-			var fullURI = CreateUri(GeneralSettings.POPULARROUTES_1, new QuerySettings { AirlineCode = airlineCode, Limit = limit });
+			var fullURI = CreateUri(GeneralSettings.POPULARROUTES_1, new MonitorQuerySettings { AirlineCode = airlineCode, Limit = limit });
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token, false);
             var result = jtoken.ToObject<Result<Tuple<string, int>>>();
@@ -49,7 +49,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<IEnumerable<Ticket>> GetPopularRoutesFromCity(string token, string origin)
 		{
-			var fullURI = CreateUri(GeneralSettings.POPULARROUTES_2, new QuerySettings { Origin = origin });
+			var fullURI = CreateUri(GeneralSettings.POPULARROUTES_2, new MonitorQuerySettings { Origin = origin });
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token, false);
 			var result = jtoken.ToObject<Result<Ticket>>();

@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using TravelpayoutsAPI.Library.Infostructures;
 
-namespace TravelpayoutsAPI.Library.Models
+namespace TravelpayoutsAPI.Library.Models.Monitor
 {
     [XmlRoot("route")]
     public class Route

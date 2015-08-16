@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TravelpayoutsAPI.Library.Models
+namespace TravelpayoutsAPI.Library.Models.Monitor
 {
     public class LabelTiket : Ticket
     {

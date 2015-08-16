@@ -3,7 +3,7 @@ using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {

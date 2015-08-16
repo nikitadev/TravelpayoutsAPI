@@ -175,14 +175,6 @@ namespace AviaTicketsWpfApplication.ViewModels
 			}
 			else
 			{
-                
-
-				// Create run time view services and models
-				if (SimpleIoc.Default.IsRegistered<IRequestManager>())
-				{
-					SimpleIoc.Default.Unregister<IRequestManager>();
-				}
-
 				var connection = new DbConnection("data");
 
                 SimpleIoc.Default.Register<IDbConnection>(() => connection);

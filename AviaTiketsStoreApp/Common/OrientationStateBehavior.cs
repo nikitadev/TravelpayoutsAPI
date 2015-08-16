@@ -75,7 +75,7 @@ namespace AviaTicketsStoreApp.Common
             _associatedPage.Loaded -= AssociatedPageLoaded;
             _associatedPage.SizeChanged += PageBaseSizeChanged;
             DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientationChanged;
-            DispatcherHelper.RunAsync(CheckOrientationForPage);
+            DispatcherHelper.CheckBeginInvokeOnUI(CheckOrientationForPage);
         }
 
         private void CheckOrientationForPage()

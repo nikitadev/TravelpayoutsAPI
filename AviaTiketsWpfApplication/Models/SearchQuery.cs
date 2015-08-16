@@ -7,12 +7,10 @@ namespace AviaTicketsWpfApplication.Models
 {
     public sealed class SearchQuery : BaseSearchQuery
     {
-        public City Original;
-        public City Destination;
         public DateTime? DepartDate;
         public DateTime? ReturnDate;
 
-        public bool IsValidate
+        public override bool IsValidate
         {
             get
             {

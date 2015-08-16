@@ -17,6 +17,8 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
@@ -25,7 +27,6 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
         public async Task<string> Get(Uri uri, string token, bool isGzip)
         {
             string url = uri.ToString();
-            string result;
             using (var httpClient = new HttpClient())
             {
                 if (!String.IsNullOrEmpty(token))
@@ -35,22 +36,26 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
                 if (isGzip)
                 {
-                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
-
-                    using (var responseStream = await httpClient.GetStreamAsync(url))
-                    using (var decompressedStream = new GZipStream(responseStream, CompressionMode.Decompress))
-                    using (var streamReader = new StreamReader(decompressedStream))
+                    string encodingKey = "Accept-Encoding";
+                    try
                     {
-                        result = await streamReader.ReadToEndAsync();
+                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(encodingKey, "gzip, deflate");
+
+                        using (var responseStream = await httpClient.GetStreamAsync(url))
+                        using (var decompressedStream = new GZipStream(responseStream, CompressionMode.Decompress))
+                        using (var streamReader = new StreamReader(decompressedStream))
+                        {
+                            return await streamReader.ReadToEndAsync();
+                        }
+                    }
+                    catch (InvalidDataException)
+                    {
+                        httpClient.DefaultRequestHeaders.Remove(encodingKey);
                     }
                 }
-                else
-                {
-                    result = await httpClient.GetStringAsync(url);
-                }
-            }
 
-            return result;
+                return await httpClient.GetStringAsync(url);
+            }
         }
 
         public async Task<T> GetObject<T>(Uri uri, string token, bool isGzip)
@@ -65,6 +70,30 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
             string json = await Get(uri, token, isGzip);
 
             return JContainer.Parse(json);
+        }
+
+        public async Task<string> Post<T>(Uri uri, T data) where T : class
+        {
+            string url = uri.ToString();
+            string result;
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = uri;
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string json = JsonConvert.SerializeObject(data);
+
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                //stringContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+
+                var message = await httpClient.PostAsync(url, stringContent);
+
+                // message.EnsureSuccessStatusCode();
+                result = await message.Content.ReadAsStringAsync();
+            }
+
+            return result;
         }
     }
 }

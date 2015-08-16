@@ -57,7 +57,7 @@ namespace AviaTicketsStoreApp.Common
             {
                 SizeChanged += UserControlBaseSizeChanged;
                 DisplayInformation.GetForCurrentView().OrientationChanged += UserControlBaseOrientationChanged;
-                DispatcherHelper.RunAsync(CheckOrientation);
+                DispatcherHelper.CheckBeginInvokeOnUI(CheckOrientation);
             }
         }
 

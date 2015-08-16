@@ -10,14 +10,14 @@
 //*********************************************************
 
 using System;
-using System.Diagnostics.Contracts;
+using Newtonsoft.Json;
 using TravelpayoutsAPI.Library.Infostructures.Implements;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace TravelpayoutsAPI.Library
 {
-	public class SearchTicketApiFactory : ISearchTicketApiFactory
+    public class SearchTicketApiFactory : ISearchTicketApiFactory
     {
         private readonly IRequestManager _requestManager;
 
@@ -27,7 +27,11 @@ namespace TravelpayoutsAPI.Library
         private readonly Func<ISearchTicketsProvider> _creatorSearchTicketsProvider;
         private readonly Func<ISimpleSearchTicketsProvider> _creatorSimpleSearchTicketsProvider;
 
+        private readonly Func<IFlightSearchProvider> _creatorFlightSearchProvider;
+
         public string Token { get; private set; }
+
+        public int Marker { get; set; }
 
         public CurrencyType Currency { get; set; }
 
@@ -101,8 +105,29 @@ namespace TravelpayoutsAPI.Library
             }
         }
 
+        private IFlightSearchProvider _flightSearchProvider;
+        public IFlightSearchProvider FlightSearch
+        {
+            get
+            {
+                if (_flightSearchProvider == null)
+                {
+                    _flightSearchProvider = _creatorFlightSearchProvider.Invoke();
+                }
+
+                return _flightSearchProvider;
+            }
+        }
+
         public SearchTicketApiFactory()
         {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DateFormatString = "yyyy-MM-dd",
+                ContractResolver = new LowercaseContractResolver()
+            };
+
             _requestManager = new RequestManager();
 
             _creatorUserInfoProvider = new Func<IUserInfoProvider>(() => new UserInfoProvider(_requestManager));
@@ -110,6 +135,8 @@ namespace TravelpayoutsAPI.Library
             _creatorPopularRoutesProvider = new Func<IPopularRoutesProvider>(() => new PopularRoutesProvider(_requestManager));
             _creatorSearchTicketsProvider = new Func<ISearchTicketsProvider>(() => new SearchTicketsProvider(_requestManager));
             _creatorSimpleSearchTicketsProvider = new Func<ISimpleSearchTicketsProvider>(() => new SimpleSearchTicketsProvider(_requestManager));
+
+            _creatorFlightSearchProvider = new Func<IFlightSearchProvider>(() => new FlightSearchProvider(_requestManager));
         }
     }
 }

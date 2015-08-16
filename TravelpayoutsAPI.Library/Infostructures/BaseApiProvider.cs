@@ -40,7 +40,7 @@ namespace TravelpayoutsAPI.Library.Infostructures
         /// <param name="path"></param>
         /// <param name="settings"></param>
         /// <returns>http://api.travelpayouts.com/{version}/{type}?{settings}</returns>
-        protected virtual Uri CreateUri(string path, QuerySettings querySettings)
+        protected virtual Uri CreateUri(string path, IQuerySettings querySettings)
         {
             if (querySettings != null)
                 return CreateUri(path, querySettings.ToString());

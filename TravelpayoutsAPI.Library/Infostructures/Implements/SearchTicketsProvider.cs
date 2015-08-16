@@ -15,10 +15,11 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
-	public class SearchTicketsProvider : BaseApiProvider, ISearchTicketsProvider
+	public sealed class SearchTicketsProvider : BaseApiProvider, ISearchTicketsProvider
 	{
         public SearchTicketsProvider(IRequestManager requestManager)
             : base(requestManager)
@@ -33,7 +34,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
             return uriBuilder;
         }
 
-		public async Task<List<Ticket>> GetPrice(string token, QuerySettings settings)
+		public async Task<List<Ticket>> GetPrice(string token, MonitorQuerySettings settings)
 		{
 			var fullURI = CreateUri(PriceApiSettingsV2.LATEST, settings);
 
@@ -67,7 +68,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 			SortingMode sorting = SortingMode.Price,
 			TripClassMode tripClass = TripClassMode.Econom)
 		{
-			var settings = new QuerySettings(origin, destination)
+			var settings = new MonitorQuerySettings(origin, destination)
 			{
                 BeginningOfPeriod = departDate,
 				Period = period,
@@ -97,7 +98,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 		/// <returns></returns>
 		public async Task<List<Ticket>> GetPriceOnMonth(string token, string origin, string destination, DateTime month, bool showToAffiliates = true)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV2.MONTHMATRIX, new QuerySettings(origin, destination) { Month = month, IsShowToAffiliates = showToAffiliates });
+			var fullURI = CreateUri(PriceApiSettingsV2.MONTHMATRIX, new MonitorQuerySettings(origin, destination) { Month = month, IsShowToAffiliates = showToAffiliates });
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token, true);
 			var result = jtoken.ToObject<Result<Ticket>>();
@@ -127,7 +128,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 		/// <returns></returns>
 		public async Task<List<Ticket>> GetNearestPrice(string token, string origin, string destination = "-", bool showToAffiliates = true, DateTime? departDate = null, DateTime? returnDate = null)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV2.NEARESTMATRIX, new QuerySettings(origin, destination, departDate, returnDate) { IsShowToAffiliates = showToAffiliates });
+			var fullURI = CreateUri(PriceApiSettingsV2.NEARESTMATRIX, new MonitorQuerySettings(origin, destination, departDate, returnDate) { IsShowToAffiliates = showToAffiliates });
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token, true);
 			var result = jtoken.ToObject<Result<Ticket>>();
@@ -157,7 +158,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 		/// <returns></returns>
 		public async Task<List<Ticket>> GetPriceOnWeek(string token, string origin, string destination = "-", bool showToAffiliates = true, DateTime? departDate = null, DateTime? returnDate = null)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV2.WEEKMATRIX, new QuerySettings(origin, destination, departDate, returnDate) { IsShowToAffiliates = showToAffiliates });
+			var fullURI = CreateUri(PriceApiSettingsV2.WEEKMATRIX, new MonitorQuerySettings(origin, destination, departDate, returnDate) { IsShowToAffiliates = showToAffiliates });
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token, true);
 			var result = jtoken.ToObject<Result<Ticket>>();

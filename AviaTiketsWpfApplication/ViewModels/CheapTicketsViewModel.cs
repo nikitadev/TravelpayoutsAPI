@@ -9,6 +9,7 @@ using AviaTicketsWpfApplication.Properties;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
 using TravelpayoutsAPI.Library.Models.Data;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {

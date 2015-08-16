@@ -83,7 +83,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
         protected override async Task InitializeAsync()
         {
-            base.InitializeAsync();
+            await base.InitializeAsync();
 
             _userLocationInfo = await _cacheService.GetAsync<UserLocationInfo>(CacheTags.USERINFO);
             var cities = await _cacheService.GetAsync<List<City>>(DataNames.Cities);

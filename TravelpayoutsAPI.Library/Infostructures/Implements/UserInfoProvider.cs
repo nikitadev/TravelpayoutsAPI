@@ -1,15 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models.Data;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
+    /// <summary>
+    /// Информация о пользователи
+    /// </summary>
     public sealed class UserInfoProvider : BaseApiProvider, IUserInfoProvider
     {
         private UriBuilder _uriBuilder;
@@ -56,7 +56,6 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
             // http://www.travelpayouts.com/whereami?locale=ru&callback=useriata&ip=40.0.0.1
             _uriBuilder.Host = GeneralSettings.MAIN_URI;
-            //var uriBuilder = new UriBuilder(GeneralSettings.ShemaName, GeneralSettings.MAIN_URI, -1, GeneralSettings.WAI);
 
             var uri = CreateUri(GeneralSettings.WAI, query);
 

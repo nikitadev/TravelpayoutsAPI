@@ -15,8 +15,14 @@ namespace TravelpayoutsAPI.Library
 
 		public const string PRICE = "/prices/";
 
-		// Популярные направления авиакомпании
-		public const string POPULARROUTES_1 = "/airline-directions";
+        // Поиск в реальном времени
+        public const string FLIGHT_SEARCH = "/flight_search";
+
+        // Результат поиска в реальном времени
+        public const string FLIGHT_SEARCH_RESULT = "/flight_search_results";
+
+        // Популярные направления авиакомпании
+        public const string POPULARROUTES_1 = "/airline-directions";
 
 		// Популярные направления из города
 		public const string POPULARROUTES_2 = "/city-directions";

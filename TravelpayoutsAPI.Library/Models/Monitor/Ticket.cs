@@ -1,27 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace TravelpayoutsAPI.Library.Models
+namespace TravelpayoutsAPI.Library.Models.Monitor
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <remarks>
+    /// <summary>
+    /// Данные по авиабилету
+    /// </summary>
+    /// <remarks>
     /// "origin":"MOW",
     /// "destination":"LED"
-	/// "price": 27506,
+    /// "price": 27506,
     /// "transfers":0,
-	/// "airline": "CX",
-	/// "flight_number": 204,
-	/// "departure_at": "2015-06-05T16:40:00Z",
-	/// "return_at": "2015-06-22T12:00:00Z",
-	/// "expires_at": "2015-01-08T18:38:45Z"
-	/// </remarks>
-	public class Ticket
+    /// "airline": "CX",
+    /// "flight_number": 204,
+    /// "departure_at": "2015-06-05T16:40:00Z",
+    /// "return_at": "2015-06-22T12:00:00Z",
+    /// "expires_at": "2015-01-08T18:38:45Z"
+    /// </remarks>
+    public class Ticket
 	{
         public string Origin { get; set; }
         public string Destination { get; set; }

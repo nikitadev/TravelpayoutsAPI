@@ -33,7 +33,7 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
         protected sealed override async Task InitializeAsync()
         {
             var message = new ViewModelMessage { IsShowingProgress = true };
-            MessengerInstance.Send<ViewModelMessage>(message);
+            MessengerInstance.Send(message);
 
             IsVisibleData = false;
 
@@ -44,7 +44,7 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             IsPageMessageVisible = !IsVisibleData;
 
             message.IsShowingProgress = false;
-            MessengerInstance.Send<ViewModelMessage>(message);
+            MessengerInstance.Send(message);
         }
 
         /// <summary>

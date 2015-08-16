@@ -101,10 +101,12 @@
     <Compile Include="GeneralSettings.cs" />
     <Compile Include="Infostructures\BaseApiProvider.cs" />
     <Compile Include="Infostructures\Implements\DataInfoProvider.cs" />
+    <Compile Include="Infostructures\Implements\FlightSearchProvider.cs" />
     <Compile Include="Infostructures\Implements\RequestManager.cs" />
     <Compile Include="Infostructures\Implements\SearchTicketsProvider.cs" />
     <Compile Include="Infostructures\Implements\SimpleSearchTicketsProvider.cs" />
     <Compile Include="Infostructures\Implements\UserInfoProvider.cs" />
+    <Compile Include="Infostructures\Interfaces\IFlightSearchProvider.cs" />
     <Compile Include="Infostructures\Interfaces\ISearchTicketApiFactory.cs" />
     <Compile Include="Infostructures\Interfaces\IDataInfoProvider.cs" />
     <Compile Include="Infostructures\Interfaces\IPopularRoutesProvider.cs" />
@@ -114,6 +116,21 @@
     <Compile Include="Infostructures\Implements\PopularRoutesProvider.cs" />
     <Compile Include="Infostructures\Interfaces\IUserInfoProvider.cs" />
     <Compile Include="Infostructures\LongHelpers.cs" />
+    <Compile Include="Infostructures\Interfaces\IQuerySettings.cs" />
+    <Compile Include="LowercaseContractResolver.cs" />
+    <Compile Include="Models\Monitor\MonitoringQuerySettings.partial.cs" />
+    <Compile Include="Models\Search\Flight.cs" />
+    <Compile Include="Models\Search\Gate.cs" />
+    <Compile Include="Models\Search\GateInfo.cs" />
+    <Compile Include="Models\Search\MetaInfo.cs" />
+    <Compile Include="Models\Search\Passenger.cs" />
+    <Compile Include="Models\Search\FlightSearchQuerySettings.cs" />
+    <Compile Include="Models\Search\FlightSearchQuerySettingsEx.cs" />
+    <Compile Include="Models\Search\Proposals.cs" />
+    <Compile Include="Models\Search\SearchData.cs" />
+    <Compile Include="Models\Search\SearchResult.cs" />
+    <Compile Include="Models\Search\Segment.cs" />
+    <Compile Include="Models\Search\TermInfo.cs" />
     <Compile Include="SearchTicketApiFactory.cs" />
     <Compile Include="Models\Data\Airline.cs" />
     <Compile Include="Models\Data\AirlineAlliance.cs" />
@@ -127,17 +144,21 @@
     <Compile Include="Models\Data\Plane.cs" />
     <Compile Include="Models\Data\PlaneRoute.cs" />
     <Compile Include="Models\Data\UserLocationInfo.cs" />
-    <Compile Include="Models\LabelTiket.cs" />
-    <Compile Include="Models\Offer.cs" />
-    <Compile Include="Models\Offers.cs" />
-    <Compile Include="Models\QuerySettings.cs" />
-    <Compile Include="Models\Result.cs" />
-    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\Monitor\LabelTiket.cs" />
+    <Compile Include="Models\Monitor\Offer.cs" />
+    <Compile Include="Models\Monitor\Offers.cs" />
+    <Compile Include="Models\Monitor\MonitoringQuerySettings.cs" />
+    <Compile Include="Models\Monitor\Result.cs" />
+    <Compile Include="Models\Monitor\Ticket.cs" />
     <Compile Include="PriceApiSettingsV1.cs" />
     <Compile Include="PriceApiSettingsV2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="David.Utility.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\David.Utility.Cryptography.1.5.0\lib\David.Utility.Cryptography.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta2\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -159,6 +180,7 @@
     <None Include="packages.config" />
     <None Include="TravelpayoutsAPI.Library.licenseheader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

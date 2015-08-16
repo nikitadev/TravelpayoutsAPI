@@ -120,7 +120,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
                 return fullList;
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 SendError(Resources.Error404);
             }

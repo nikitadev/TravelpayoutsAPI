@@ -10,6 +10,7 @@ using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -63,15 +64,9 @@ namespace AviaTicketsWpfApplication.ViewModels
                 var months = query.GetMonths();
                 var durations = query.GetDurations();
 
-                IEnumerable<Ticket> collection;
-                if (query.Destination != null)
-                {
-                    collection = await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations, query.Destination.Code);
-                }
-                else
-                {
-                    collection = await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations);
-                }
+                var collection = query.Destination != null 
+                    ? await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations, query.Destination.Code)
+                    : await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations);
 
                 var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
                 var list = collection.AsParallel()

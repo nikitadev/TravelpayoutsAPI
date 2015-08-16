@@ -1,16 +1,14 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Threading;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Linq;
-using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using TravelpayoutsAPI.Library.Models;
 using TravelpayoutsAPI.Library.Models.Data;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {

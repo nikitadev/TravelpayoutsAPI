@@ -13,16 +13,15 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using TravelpayoutsAPI.Library.Models;
+using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
 	public enum CalendarType { departure_date, return_date }
 
-	public class SimpleSearchTicketsProvider : BaseApiProvider, ISimpleSearchTicketsProvider
+	public sealed class SimpleSearchTicketsProvider : BaseApiProvider, ISimpleSearchTicketsProvider
 	{
         public SimpleSearchTicketsProvider(IRequestManager requestManager)
             : base(requestManager)
@@ -70,7 +69,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<IEnumerable<Ticket>> GetCheapestTickets(string token, string origin, string destination = "-", DateTime? departDate = null, DateTime? returnDate = null)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV1.CHEAP, new QuerySettings(origin, destination, departDate, returnDate));
+			var fullURI = CreateUri(PriceApiSettingsV1.CHEAP, new MonitorQuerySettings(origin, destination, departDate, returnDate));
 
 			var jtoken = await _requestManager.GetJToken(fullURI, token);
 
@@ -79,7 +78,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<IEnumerable<Ticket>> GetDirectFlights(string token, string origin, string destination = "-", DateTime? departDate = null, DateTime? returnDate = null)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV1.DIRECT, new QuerySettings(origin, destination, departDate, returnDate));
+			var fullURI = CreateUri(PriceApiSettingsV1.DIRECT, new MonitorQuerySettings(origin, destination, departDate, returnDate));
 
             var jtoken = await _requestManager.GetJToken(fullURI, token);
 
@@ -88,7 +87,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<Dictionary<DateTime, Ticket>> GetTicketsFromCityForAnyday(string token, string origin, string destination = null, DateTime? departDate = null, int tripDuration = 0, CalendarType calendarType = CalendarType.departure_date, DateTime? returnDate = null)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV1.ANYDAY, new QuerySettings(origin, destination, departDate, returnDate));
+			var fullURI = CreateUri(PriceApiSettingsV1.ANYDAY, new MonitorQuerySettings(origin, destination, departDate, returnDate));
 
             var jtoken = await _requestManager.GetJToken(fullURI, token);
 
@@ -97,7 +96,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<IEnumerable<Ticket>> GetTicketsFromCityForAnyday(string token, string origin, string[] months, int[] tripDurations, string destination = null)
         {
-            var querySettings = !String.IsNullOrEmpty(destination) ? new QuerySettings(origin, destination) : new QuerySettings(origin);
+            var querySettings = !String.IsNullOrEmpty(destination) ? new MonitorQuerySettings(origin, destination) : new MonitorQuerySettings(origin);
 
             var tasks = new List<Task<JToken>>();
             foreach(int td in tripDurations)
@@ -137,7 +136,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 
         public async Task<Dictionary<DateTime, Ticket>> GetTicketsByMontly(string token, string origin, string destination)
 		{
-			var fullURI = CreateUri(PriceApiSettingsV1.MONTLY, new QuerySettings(origin, destination));
+			var fullURI = CreateUri(PriceApiSettingsV1.MONTLY, new MonitorQuerySettings(origin, destination));
 
             var jtoken = await _requestManager.GetJToken(fullURI, token, true);
 
