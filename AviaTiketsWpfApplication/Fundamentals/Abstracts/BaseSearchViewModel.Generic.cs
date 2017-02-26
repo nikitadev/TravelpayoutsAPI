@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using GalaSoft.MvvmLight.Command;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
@@ -42,8 +43,8 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             Initialize();
         }
 
-        protected BaseSearchViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        protected BaseSearchViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
             _searchQuery = new T();
 

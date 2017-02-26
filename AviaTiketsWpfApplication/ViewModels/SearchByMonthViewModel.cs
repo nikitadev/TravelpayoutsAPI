@@ -1,13 +1,13 @@
-﻿using AviaTicketsWpfApplication.Fundamentals;
-using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using AviaTicketsWpfApplication.Fundamentals;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Models.Data;
 
 namespace AviaTicketsWpfApplication.ViewModels
@@ -74,8 +74,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the SearchByMonthViewModel class.
         /// </summary>
-        public SearchByMonthViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public SearchByMonthViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
             DurationLower = 7;
             DurationUpper = 14;

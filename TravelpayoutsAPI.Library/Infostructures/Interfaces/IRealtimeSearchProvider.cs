@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Models;
 using TravelpayoutsAPI.Library.Models.Search;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
@@ -8,10 +7,10 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
     /// <summary>
     /// Поиск в реальном времени
     /// </summary>
-    public interface IFlightSearchProvider
+    public interface IRealtimeSearchProvider
     {
         /// <summary>
-        /// 
+        /// Поиска авиабилетов
         /// </summary>
         /// <param name="token"></param>
         /// <param name="marker"></param>

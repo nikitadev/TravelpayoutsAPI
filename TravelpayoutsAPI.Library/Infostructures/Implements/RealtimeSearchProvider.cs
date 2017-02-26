@@ -11,11 +11,11 @@ using TravelpayoutsAPI.Library.Models.Search;
 
 namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
-    public sealed class FlightSearchProvider : BaseApiProvider, IFlightSearchProvider
+    public sealed class RealtimeSearchProvider : BaseApiProvider, IRealtimeSearchProvider
     {
         private bool _canGetResult = false;
 
-        public FlightSearchProvider(IRequestManager requestManager)
+        public RealtimeSearchProvider(IRequestManager requestManager)
             : base(requestManager)
         {
         }

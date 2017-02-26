@@ -30,7 +30,16 @@
       <Value Profile="(Default)">https://www.travelpayouts.com/</Value>
     </Setting>
     <Setting Name="TestToken" Type="System.String" Scope="User">
-      <Value Profile="(Default)">321d6a221f8926b5ec41ae89a3b2ae7b</Value>
+      <Value Profile="(Default)">9698fc7c86add3ece24f30a23b567fdf</Value>
+    </Setting>
+    <Setting Name="RealtimeTicketsIconName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appbar_magnify_browse</Value>
+    </Setting>
+    <Setting Name="TestMarker" Type="System.String" Scope="User">
+      <Value Profile="(Default)">77022</Value>
+    </Setting>
+    <Setting Name="Host" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Sample for TravelpayoutsAPI .NET</Value>
     </Setting>
   </Settings>
 </SettingsFile>

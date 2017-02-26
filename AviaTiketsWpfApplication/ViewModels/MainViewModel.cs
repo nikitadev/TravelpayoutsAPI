@@ -156,6 +156,15 @@ namespace AviaTicketsWpfApplication.ViewModels
 
                 SearchTiles.Add(new TileViewModel
                 {
+                    Background = new SolidColorBrush(Colors.LightSlateGray),
+                    Title = Resources.RealtimeTickets,
+                    SizeMode = TileSizeMode.Medium,
+                    IconName = Settings.Default.RealtimeTicketsIconName,
+                    TypePage = typeof(RealtimeTicketsViewModel)
+                });
+
+                SearchTiles.Add(new TileViewModel
+                {
                     Background = new SolidColorBrush(Colors.SlateBlue),
                     Title = Resources.CheapestTickets,
                     SizeMode = TileSizeMode.Medium,
@@ -167,7 +176,7 @@ namespace AviaTicketsWpfApplication.ViewModels
                 {
                     Background = new SolidColorBrush(Colors.DarkCyan),
                     Title = Resources.DirectFlights,
-                    SizeMode = TileSizeMode.Medium,
+                    SizeMode = TileSizeMode.Small,
                     IconName = Settings.Default.DirectTicketsIconName,
                     TypePage = typeof(DirectTicketsViewModel)
                 });
@@ -305,8 +314,8 @@ namespace AviaTicketsWpfApplication.ViewModels
 
         public async Task CallEnterTokenDialogAsync()
         {
-            string token = await _token.Value;
-            if (!String.IsNullOrEmpty(token))
+            var info = await _apiInfo.Value;
+            if (info != null)
                 return;
 
             MessengerInstance.Send(new DialogMessage

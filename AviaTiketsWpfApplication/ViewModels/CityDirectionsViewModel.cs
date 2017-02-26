@@ -8,7 +8,7 @@ using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
 using AviaTicketsWpfApplication.ViewModels.Data;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Models.Data;
 
 namespace AviaTicketsWpfApplication.ViewModels
@@ -26,8 +26,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the CityDirectionsViewModel class.
         /// </summary>
-        public CityDirectionsViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public CityDirectionsViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 
@@ -102,10 +102,12 @@ namespace AviaTicketsWpfApplication.ViewModels
             }
 
             TitleChart = city.CultureName;
-            string token = await _token.Value;
+            var info = await _apiInfo.Value;
+            string token = info.Item1;
+
             try
             {
-                var list = await _searchTicketApiFactory.PopularRoutes.GetPopularRoutesFromCity(token, city.Code);
+                var list = await _apiFactory.PopularRoutes.GetPopularRoutesFromCity(token, city.Code);
                 return list.Join(_cities, t => t.Destination, c => c.Code, (t, c) => new Tuple<string, double>(c.CultureName, t.Price));
             }
             catch (HttpRequestException)

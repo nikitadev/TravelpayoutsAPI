@@ -2,6 +2,7 @@
 using AviaTicketsWpfApplication.Properties;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
 {
@@ -35,8 +36,8 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             set { Set(ref _isVisibleData, value); }
         }
 
-        protected BasePageViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        protected BasePageViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
             IsProgress = false;
             IsVisibleData = false;

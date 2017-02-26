@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
@@ -17,8 +18,8 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             set { Set(ref _collection, value); }
         }
 
-        protected BasePageSearchResultViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        protected BasePageSearchResultViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 

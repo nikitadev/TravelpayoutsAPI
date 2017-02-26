@@ -18,8 +18,7 @@
             <Label Content="{Binding PageMessage}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    Style="{StaticResource DescriptionHeaderStyleKey}"
-                   Visibility="{Binding IsPageMessageVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}">
-            </Label>
+                   Visibility="{Binding IsPageMessageVisible, Converter={StaticResource BooleanToVisibilityConverterKey}}" />
             <controls:ProgressRing IsActive="{Binding IsProgress}" />
         </Grid>
     </ControlTemplate>

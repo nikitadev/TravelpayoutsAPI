@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using System.Diagnostics;
+using AviaTicketsWpfApplication.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TravelpayoutsAPI.Library;
 
 namespace AviaTicketsWpfApplication.Fundamentals
 {
-	public sealed class CacheService : ICacheService
+    public sealed class CacheService : ICacheService
 	{
-        private readonly ISearchTicketApiFactory _searchTicketApiFactory;
+        private readonly IApiFactory _apiFactory;
 		private readonly IRepository<CacheItem> _repositoryCache;
 
 		public CacheService(
-            ISearchTicketApiFactory searchTicketApiFactory,
+            IApiFactory apiFactory,
 			IRepository<CacheItem> repositoryCache)
 		{
-            _searchTicketApiFactory = searchTicketApiFactory;
+            _apiFactory = apiFactory;
 			_repositoryCache = repositoryCache;
         }
 
@@ -47,8 +47,8 @@ namespace AviaTicketsWpfApplication.Fundamentals
 
 			if (item == null)
 			{
-                string ip = await _searchTicketApiFactory.UserInfo.UserIP;
-                var userLocationInfo = await _searchTicketApiFactory.UserInfo.GetUserLocationAsync(ip);
+                string ip = await _apiFactory.UserInfo.UserIP;
+                var userLocationInfo = await _apiFactory.UserInfo.GetUserLocationAsync(ip);
 
 				await _repositoryCache.InsertAsync(new CacheItem
 				{
@@ -70,7 +70,7 @@ namespace AviaTicketsWpfApplication.Fundamentals
 			{
 				if (Math.Abs(today.Day - item.UpdateAt.Day) > 10)
 				{
-                    item.Info = await _searchTicketApiFactory.DataInfo.GetJsonAsync(dataName);
+                    item.Info = await _apiFactory.DataInfo.GetJsonAsync(dataName);
 					item.UpdateAt = DateTime.Now;
 
 					await _repositoryCache.UpdateAsync(item);
@@ -81,7 +81,7 @@ namespace AviaTicketsWpfApplication.Fundamentals
 				await _repositoryCache.InsertAsync(new CacheItem
 				{
 					Tag = dataName,
-                    Info = await _searchTicketApiFactory.DataInfo.GetJsonAsync(dataName),
+                    Info = await _apiFactory.DataInfo.GetJsonAsync(dataName),
 					CreateAt = DateTime.Now,
 					UpdateAt = DateTime.Now,
                     IsTemporary = false
@@ -113,15 +113,17 @@ namespace AviaTicketsWpfApplication.Fundamentals
             }
         }
 
-        public async Task<string> GetTokenAsync()
+        public async Task<Tuple<string, string>> GetApiInfoAsync()
         {
-            var item = await _repositoryCache.GetByTagAsync("token");
+            var item = await _repositoryCache.GetByTagAsync(CacheTags.APIINFO);
             if (item != null)
             {
-                return item.Info;
+                var info = JObject.Parse(item.Info);
+
+                return new Tuple<string, string>((string)info["token"], (string)info["marker"]);
             }
 
-            return String.Empty;
+            return null;
         }
     }
 }

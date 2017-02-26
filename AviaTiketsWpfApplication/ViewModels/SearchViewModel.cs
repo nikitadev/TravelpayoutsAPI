@@ -1,12 +1,12 @@
-﻿using AviaTicketsWpfApplication.Fundamentals;
-using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using AviaTicketsWpfApplication.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using AviaTicketsWpfApplication.Fundamentals;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Models.Data;
 
 namespace AviaTicketsWpfApplication.ViewModels
@@ -66,8 +66,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the SearchViewModel class.
         /// </summary>
-        public SearchViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public SearchViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 

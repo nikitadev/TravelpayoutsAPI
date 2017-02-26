@@ -8,6 +8,7 @@ using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
 using TravelpayoutsAPI.Library.Models.Monitor;
@@ -25,8 +26,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the CalendarTiketsViewModel class.
         /// </summary>
-        public CalendarTicketsViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public CalendarTicketsViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 
@@ -58,15 +59,17 @@ namespace AviaTicketsWpfApplication.ViewModels
                 return null;
             }
 
-            var token = await _token.Value;
+            var info = await _apiInfo.Value;
+            string token = info.Item1;
+
             try
             {
                 var months = query.GetMonths();
                 var durations = query.GetDurations();
 
                 var collection = query.Destination != null 
-                    ? await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations, query.Destination.Code)
-                    : await _searchTicketApiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations);
+                    ? await _apiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations, query.Destination.Code)
+                    : await _apiFactory.SimpleSearch.GetTicketsFromCityForAnyday(token, query.Original.Code, months, durations);
 
                 var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
                 var list = collection.AsParallel()

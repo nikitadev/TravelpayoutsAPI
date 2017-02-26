@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
 {
@@ -16,8 +17,8 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             set { Set(ref _titleChart, value); }
         }
 
-        public BasePageChartViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public BasePageChartViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 

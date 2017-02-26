@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace TravelpayoutsAPI.Library.Models.Search
 {
-    public sealed class Proposals
+    public sealed class Proposal
     {
         /// <summary>
         /// Уникальный id билета, для объединения информации от разных агентств в один билет

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
 {
@@ -24,8 +25,8 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
             private set { Set(ref _collection, value); }
         }
 
-        public BaseCollectionViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public BaseCollectionViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
             PageMessage = Resources.DataLoading;
         }

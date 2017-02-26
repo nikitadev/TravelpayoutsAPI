@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,18 +14,18 @@ namespace TravelpayoutsAPI.UnitTestProject
     [TestClass]
     public class IntegrationTestFlightSearchProvider
     {
-        private const string marker = "77022"; // 16886;
-        private const string token = "9698fc7c86add3ece24f30a23b567fdf"; // "321d6a221f8926b5ec41ae89a3b2ae7b";
+        private const string marker = "16886"; //"77022";
+        private const string token = "321d6a221f8926b5ec41ae89a3b2ae7b"; //"9698fc7c86add3ece24f30a23b567fdf";
 
-        private readonly IFlightSearchProvider _flightSearchProvider;
+        private readonly IRealtimeSearchProvider _flightSearchProvider;
         private readonly IUserInfoProvider _userInfoProvider;
 
         public IntegrationTestFlightSearchProvider()
         {
-            var apiFactory = new SearchTicketApiFactory();
+            var apiFactory = new ApiFactory();
 
             _userInfoProvider = apiFactory.UserInfo;
-            _flightSearchProvider = apiFactory.FlightSearch;
+            _flightSearchProvider = apiFactory.RealtimeSearch;
         }
 
         #region Additional test attributes

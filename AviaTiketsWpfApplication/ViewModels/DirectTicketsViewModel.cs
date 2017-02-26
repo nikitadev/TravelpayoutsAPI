@@ -6,7 +6,7 @@ using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Models.Data;
 using TravelpayoutsAPI.Library.Models.Monitor;
 
@@ -25,8 +25,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the DirectTiketsViewModel class.
         /// </summary>
-        public DirectTicketsViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService) 
+        public DirectTicketsViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService) 
         {
         }
 
@@ -55,18 +55,20 @@ namespace AviaTicketsWpfApplication.ViewModels
                 return null;
             }
 
-            var token = await _token.Value;
+            var info = await _apiInfo.Value;
+            string token = info.Item1;
+
             try
             {
                 IEnumerable<Ticket> tickets;
                 if (query.Destination != null && query.DepartDate.HasValue && query.ReturnDate.HasValue)
                 {
-                    tickets = await _searchTicketApiFactory.SimpleSearch
+                    tickets = await _apiFactory.SimpleSearch
                         .GetDirectFlights(token, query.Original.Code, query.Destination.Code, query.DepartDate, query.ReturnDate);
                 }
                 else
                 {
-                    tickets = await _searchTicketApiFactory.SimpleSearch
+                    tickets = await _apiFactory.SimpleSearch
                         .GetDirectFlights(token, query.Original.Code, query.Destination != null ? query.Destination.Code : null);
                 }
 

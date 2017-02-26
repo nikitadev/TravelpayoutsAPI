@@ -103,6 +103,14 @@ namespace AviaTicketsWpfApplication.ViewModels
             }
         }
 
+        public RealtimeTicketsViewModel RealtimeTickets
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RealtimeTicketsViewModel>();
+            }
+        }
+
         public object TokenDialog
         {
             get
@@ -151,6 +159,14 @@ namespace AviaTicketsWpfApplication.ViewModels
             }
         }
 
+        public RealtimeSearchViewModel RealtimeSearch
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RealtimeSearchViewModel>(Guid.NewGuid().ToString());
+            }
+        }
+
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel Main
@@ -181,7 +197,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 				SimpleIoc.Default.Register<IRepository<CacheItem>, CacheRepository>();
                 SimpleIoc.Default.Register<ICacheService, CacheService>();
 
-                SimpleIoc.Default.Register<ISearchTicketApiFactory, SearchTicketApiFactory>();
+                SimpleIoc.Default.Register<IApiFactory, ApiFactory>();
 
 				SimpleIoc.Default.Register<Bootstrapper>();
 
@@ -193,12 +209,14 @@ namespace AviaTicketsWpfApplication.ViewModels
                 SimpleIoc.Default.Register<CountryListViewModel>();
                 SimpleIoc.Default.Register<AirportListViewModel>();
                 SimpleIoc.Default.Register<CityDirectionsViewModel>();
-                SimpleIoc.Default.Register<AirlineDirectionsViewModel>();                
+                SimpleIoc.Default.Register<AirlineDirectionsViewModel>();
+                SimpleIoc.Default.Register<RealtimeTicketsViewModel>();
 
                 // search forms
                 SimpleIoc.Default.Register<SearchViewModel>();
                 SimpleIoc.Default.Register<SimpleSearchViewModel>();
                 SimpleIoc.Default.Register<SearchByMonthViewModel>();
+                SimpleIoc.Default.Register<RealtimeSearchViewModel>();
 
                 // dialogs
                 SimpleIoc.Default.Register<TokenDialogViewModel>();

@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using AviaTicketsWpfApplication.Fundamentals;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Models.Data;
 using AviaTicketsWpfApplication.Fundamentals.Abstracts;
 using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.ViewModels.Data;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
+using TravelpayoutsAPI.Library.Models.Data;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -19,8 +17,8 @@ namespace AviaTicketsWpfApplication.ViewModels
     /// </summary>
     public sealed class CountryListViewModel : BaseCollectionViewModel<CountryViewModel>
     {
-        public CountryListViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public CountryListViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 

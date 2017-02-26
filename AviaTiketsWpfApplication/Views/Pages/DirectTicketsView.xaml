@@ -8,25 +8,19 @@
       Template="{StaticResource PageControlTemplateKey}"
       DataContext="{Binding DirectTikets, Source={StaticResource Locator}}"
       Title="DirectTiketsView">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <ListBox Grid.Row="1" 
-                 Margin="10"
-                 VirtualizingStackPanel.IsVirtualizing="True"
-                 ScrollViewer.CanContentScroll="False"
-                 ForceCursor="True"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 ItemsSource="{Binding Collection}"
-                 ItemTemplate="{StaticResource TicketDataTemplateItemKey}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-    </Grid>
+    <ListBox Grid.Row="1" 
+            Margin="10"
+            VirtualizingStackPanel.IsVirtualizing="True"
+            ScrollViewer.CanContentScroll="False"
+            ForceCursor="True"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Collection}"
+            ItemTemplate="{StaticResource TicketDataTemplateItemKey}">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" />
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>
 </Page>

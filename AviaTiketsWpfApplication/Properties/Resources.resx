@@ -175,7 +175,7 @@
     <value>Loading... {0}% ({1})</value>
   </data>
   <data name="GetToken" xml:space="preserve">
-    <value>You can get token</value>
+    <value>You can get token and marker</value>
   </data>
   <data name="here" xml:space="preserve">
     <value>here</value>
@@ -226,13 +226,13 @@
     <value>Information</value>
   </data>
   <data name="TitleTokenDlg" xml:space="preserve">
-    <value>Enter token for Travelpayouts API</value>
+    <value>Enter token and marker for Travelpayouts API</value>
   </data>
   <data name="TooltipSearchButton" xml:space="preserve">
     <value>Shows search panel</value>
   </data>
   <data name="UseTextToken" xml:space="preserve">
-    <value>Use test token</value>
+    <value>Use test token and marker</value>
   </data>
   <data name="ValidateMsgToken" xml:space="preserve">
     <value>The token can not be empty</value>
@@ -299,5 +299,53 @@
   </data>
   <data name="DataLoading" xml:space="preserve">
     <value>Loading... Wait.</value>
+  </data>
+  <data name="RealtimeTickets" xml:space="preserve">
+    <value>Realtime search</value>
+  </data>
+  <data name="Adults" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="Infants" xml:space="preserve">
+    <value>Infants</value>
+  </data>
+  <data name="TripClass" xml:space="preserve">
+    <value>Trip Class</value>
+  </data>
+  <data name="TripClassBuisness" xml:space="preserve">
+    <value>Buisness</value>
+  </data>
+  <data name="TripClassEconom" xml:space="preserve">
+    <value>Econom</value>
+  </data>
+  <data name="ValidateMsgAdults" xml:space="preserve">
+    <value>The adults can not be empty</value>
+  </data>
+  <data name="ValidateMsgChildren" xml:space="preserve">
+    <value>The children can not be empty</value>
+  </data>
+  <data name="ValidateMsgDepartDate" xml:space="preserve">
+    <value>The depart date can not be empty</value>
+  </data>
+  <data name="ValidateMsgDestination" xml:space="preserve">
+    <value>The destination can not be empty</value>
+  </data>
+  <data name="ValidateMsgInfants" xml:space="preserve">
+    <value>The infants can not be empty</value>
+  </data>
+  <data name="ValidateMsgMarker" xml:space="preserve">
+    <value>The marker can not be empty</value>
+  </data>
+  <data name="ValidateMsgOrigin" xml:space="preserve">
+    <value>The origin can not be empty</value>
+  </data>
+  <data name="ValidateMsgReturnDate" xml:space="preserve">
+    <value>The return date can not be empty</value>
+  </data>
+  <data name="WatermarkMarker" xml:space="preserve">
+    <value>Enter marker here</value>
   </data>
 </root>

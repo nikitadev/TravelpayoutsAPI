@@ -1,8 +1,8 @@
-﻿using AviaTicketsWpfApplication.Fundamentals.Abstracts;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using AviaTicketsWpfApplication.Fundamentals.Abstracts;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace AviaTicketsWpfApplication.ViewModels
@@ -15,14 +15,14 @@ namespace AviaTicketsWpfApplication.ViewModels
     /// </summary>
     public sealed class SpecialOffersViewModel : BaseCollectionViewModel<Offer>
     {
-        public SpecialOffersViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public SpecialOffersViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 
         protected override async Task<IEnumerable<Offer>> UpdateCollection()
         {
-            return await _searchTicketApiFactory.MainSearch.GetSpecialOffers();
+            return await _apiFactory.MainSearch.GetSpecialOffers();
         }
     }
 }

@@ -58,7 +58,7 @@ namespace TravelpayoutsAPI.Library.Models.Search
         /// <summary>
         /// массив найденных вариантов
         /// </summary>
-        public List<Proposals> Proposals { get; set; }
+        public List<Proposal> Proposals { get; set; }
 
         public string Currency { get; set; }
 

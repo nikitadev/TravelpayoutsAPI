@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.Contracts;
+using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
-namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
+namespace TravelpayoutsAPI.Library
 {
-    [ContractClass(typeof(SearchTicketApiFactoryContract))]
-    public interface ISearchTicketApiFactory
+    [ContractClass(typeof(ApiFactoryContract))]
+    public interface IApiFactory
     {
         /// <summary>
         /// Предоставляет доступ к данным о пользователе
@@ -34,11 +34,11 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
         /// <summary>
         /// Предоставляет доступ к стандартному поиску
         /// </summary>
-        IFlightSearchProvider FlightSearch { get; }
+        IRealtimeSearchProvider RealtimeSearch { get; }
     }
 
-    [ContractClassFor(typeof(ISearchTicketApiFactory))]
-    internal abstract class SearchTicketApiFactoryContract : ISearchTicketApiFactory
+    [ContractClassFor(typeof(IApiFactory))]
+    internal abstract class ApiFactoryContract : IApiFactory
     {
         public IUserInfoProvider UserInfo
         {
@@ -90,13 +90,13 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
             }
         }
 
-        public IFlightSearchProvider FlightSearch
+        public IRealtimeSearchProvider RealtimeSearch
         {
             get
             {
-                Contract.Ensures(Contract.Result<IFlightSearchProvider>() != null);
+                Contract.Ensures(Contract.Result<IRealtimeSearchProvider>() != null);
 
-                return default(IFlightSearchProvider);
+                return default(IRealtimeSearchProvider);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace TravelpayoutsAPI.UnitTestProject
         [TestInitialize]
         public void TestInitialize()
         {
-            var apiFactory = new SearchTicketApiFactory();
+            var apiFactory = new ApiFactory();
         }
 
         [TestMethod]

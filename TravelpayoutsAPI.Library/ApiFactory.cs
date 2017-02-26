@@ -17,7 +17,7 @@ using TravelpayoutsAPI.Library.Models.Monitor;
 
 namespace TravelpayoutsAPI.Library
 {
-    public class SearchTicketApiFactory : ISearchTicketApiFactory
+    public class ApiFactory : IApiFactory
     {
         private readonly IRequestManager _requestManager;
 
@@ -27,7 +27,7 @@ namespace TravelpayoutsAPI.Library
         private readonly Func<ISearchTicketsProvider> _creatorSearchTicketsProvider;
         private readonly Func<ISimpleSearchTicketsProvider> _creatorSimpleSearchTicketsProvider;
 
-        private readonly Func<IFlightSearchProvider> _creatorFlightSearchProvider;
+        private readonly Func<IRealtimeSearchProvider> _creatorRealtimeSearchProvider;
 
         public string Token { get; private set; }
 
@@ -105,21 +105,21 @@ namespace TravelpayoutsAPI.Library
             }
         }
 
-        private IFlightSearchProvider _flightSearchProvider;
-        public IFlightSearchProvider FlightSearch
+        private IRealtimeSearchProvider _flightSearchProvider;
+        public IRealtimeSearchProvider RealtimeSearch
         {
             get
             {
                 if (_flightSearchProvider == null)
                 {
-                    _flightSearchProvider = _creatorFlightSearchProvider.Invoke();
+                    _flightSearchProvider = _creatorRealtimeSearchProvider.Invoke();
                 }
 
                 return _flightSearchProvider;
             }
         }
 
-        public SearchTicketApiFactory()
+        public ApiFactory()
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -136,7 +136,7 @@ namespace TravelpayoutsAPI.Library
             _creatorSearchTicketsProvider = new Func<ISearchTicketsProvider>(() => new SearchTicketsProvider(_requestManager));
             _creatorSimpleSearchTicketsProvider = new Func<ISimpleSearchTicketsProvider>(() => new SimpleSearchTicketsProvider(_requestManager));
 
-            _creatorFlightSearchProvider = new Func<IFlightSearchProvider>(() => new FlightSearchProvider(_requestManager));
+            _creatorRealtimeSearchProvider = new Func<IRealtimeSearchProvider>(() => new RealtimeSearchProvider(_requestManager));
         }
     }
 }

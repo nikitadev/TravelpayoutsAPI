@@ -16,6 +16,8 @@
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,13 +103,13 @@
     <Compile Include="GeneralSettings.cs" />
     <Compile Include="Infostructures\BaseApiProvider.cs" />
     <Compile Include="Infostructures\Implements\DataInfoProvider.cs" />
-    <Compile Include="Infostructures\Implements\FlightSearchProvider.cs" />
+    <Compile Include="Infostructures\Implements\RealtimeSearchProvider.cs" />
     <Compile Include="Infostructures\Implements\RequestManager.cs" />
     <Compile Include="Infostructures\Implements\SearchTicketsProvider.cs" />
     <Compile Include="Infostructures\Implements\SimpleSearchTicketsProvider.cs" />
     <Compile Include="Infostructures\Implements\UserInfoProvider.cs" />
-    <Compile Include="Infostructures\Interfaces\IFlightSearchProvider.cs" />
-    <Compile Include="Infostructures\Interfaces\ISearchTicketApiFactory.cs" />
+    <Compile Include="Infostructures\Interfaces\IRealtimeSearchProvider.cs" />
+    <Compile Include="IApiFactory.cs" />
     <Compile Include="Infostructures\Interfaces\IDataInfoProvider.cs" />
     <Compile Include="Infostructures\Interfaces\IPopularRoutesProvider.cs" />
     <Compile Include="Infostructures\Interfaces\IRequestManager.cs" />
@@ -126,12 +128,12 @@
     <Compile Include="Models\Search\Passenger.cs" />
     <Compile Include="Models\Search\FlightSearchQuerySettings.cs" />
     <Compile Include="Models\Search\FlightSearchQuerySettingsEx.cs" />
-    <Compile Include="Models\Search\Proposals.cs" />
+    <Compile Include="Models\Search\Proposal.cs" />
     <Compile Include="Models\Search\SearchData.cs" />
     <Compile Include="Models\Search\SearchResult.cs" />
     <Compile Include="Models\Search\Segment.cs" />
     <Compile Include="Models\Search\TermInfo.cs" />
-    <Compile Include="SearchTicketApiFactory.cs" />
+    <Compile Include="ApiFactory.cs" />
     <Compile Include="Models\Data\Airline.cs" />
     <Compile Include="Models\Data\AirlineAlliance.cs" />
     <Compile Include="Models\Data\Airport.cs" />
@@ -159,8 +161,8 @@
       <HintPath>..\packages\David.Utility.Cryptography.1.5.0\lib\David.Utility.Cryptography.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta2\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Compression">
@@ -182,10 +184,12 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

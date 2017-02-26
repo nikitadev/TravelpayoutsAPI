@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Threading.Tasks;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
+using TravelpayoutsAPI.Library;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
 {
@@ -16,9 +17,9 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
     public abstract class BaseViewModel : ViewModelBase
     {
         protected readonly ICacheService _cacheService;
-        protected readonly ISearchTicketApiFactory _searchTicketApiFactory;
+        protected readonly IApiFactory _apiFactory;
 
-        protected readonly Lazy<Task<string>> _token;
+        protected readonly Lazy<Task<Tuple<string, string>>> _apiInfo;
 
         public RelayCommand ContentLoadedCommand { get; set; }
         public RelayCommand ContentUnloadedCommand { get; set; }
@@ -34,16 +35,16 @@ namespace AviaTicketsWpfApplication.Fundamentals.Abstracts
         {
             _cacheService = cacheService;
 
-            _token = new Lazy<Task<string>>(() => _cacheService.GetTokenAsync(), true);
+            _apiInfo = new Lazy<Task<Tuple<string, string>>>(() => _cacheService.GetApiInfoAsync(), true);
         }
 
         /// <summary>
         /// Initializes a new instance of the BasePageViewModel class.
         /// </summary>
-        public BaseViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
+        public BaseViewModel(IApiFactory apiFactory, ICacheService cacheService)
             : this(cacheService)
         {
-            _searchTicketApiFactory = searchTicketApiFactory;
+            _apiFactory = apiFactory;
         }
 
         protected abstract Task InitializeAsync();

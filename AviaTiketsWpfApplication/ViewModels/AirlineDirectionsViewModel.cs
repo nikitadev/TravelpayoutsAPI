@@ -8,6 +8,7 @@ using AviaTicketsWpfApplication.Fundamentals.Interfaces;
 using AviaTicketsWpfApplication.Models;
 using AviaTicketsWpfApplication.Properties;
 using AviaTicketsWpfApplication.ViewModels.Data;
+using TravelpayoutsAPI.Library;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models.Data;
 
@@ -27,8 +28,8 @@ namespace AviaTicketsWpfApplication.ViewModels
         /// <summary>
         /// Initializes a new instance of the AirlineDirectionsViewModel class.
         /// </summary>
-        public AirlineDirectionsViewModel(ISearchTicketApiFactory searchTicketApiFactory, ICacheService cacheService)
-            : base(searchTicketApiFactory, cacheService)
+        public AirlineDirectionsViewModel(IApiFactory apiFactory, ICacheService cacheService)
+            : base(apiFactory, cacheService)
         {
         }
 
@@ -104,11 +105,12 @@ namespace AviaTicketsWpfApplication.ViewModels
 
             TitleChart = airline.Name;
 
-            string token = await _token.Value;
+            var info = await _apiInfo.Value;
+            string token = info.Item1;
 
             try
             {
-                var list = await _searchTicketApiFactory.PopularRoutes.GetPopularAirlineRoutes(token, airline.Code, 10);
+                var list = await _apiFactory.PopularRoutes.GetPopularAirlineRoutes(token, airline.Code, 10);
                 var fullList = list
                     .Select(t =>
                     {

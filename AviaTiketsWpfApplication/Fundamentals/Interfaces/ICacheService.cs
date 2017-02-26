@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace AviaTicketsWpfApplication.Fundamentals.Interfaces
 {
@@ -10,6 +11,6 @@ namespace AviaTicketsWpfApplication.Fundamentals.Interfaces
         Task ClearFromTemporaryAsync();
 		Task InsertUserLocationAsync();
         Task<T> GetAsync<T>(string tag) where T : class;
-        Task<string> GetTokenAsync();
+        Task<Tuple<string, string>> GetApiInfoAsync();
     }
 }
