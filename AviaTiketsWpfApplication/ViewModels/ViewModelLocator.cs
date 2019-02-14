@@ -12,24 +12,19 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using AviaTicketsWpfApplication.Fundamentals;
+using AviaTicketsWpfApplication.Fundamentals.Interfaces;
+using AviaTicketsWpfApplication.Models;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
-using Microsoft.Practices.ServiceLocation;
-using System;
-using TravelpayoutsAPI.Library.Infostructures.Implements;
-using TravelpayoutsAPI.Library.Infostructures.Interfaces;
-using AviaTicketsWpfApplication.Fundamentals;
-using AviaTicketsWpfApplication.Models;
-using System.IO;
-using TravelpayoutsAPI.Library.Infostructures;
-using AviaTicketsWpfApplication.Fundamentals.Interfaces;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using TravelpayoutsAPI.Library;
 using GalaSoft.MvvmLight.Messaging;
-using System.Diagnostics;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Threading.Tasks;
+using TravelpayoutsAPI.Library;
+using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 
 namespace AviaTicketsWpfApplication.ViewModels
 {
@@ -175,13 +170,11 @@ namespace AviaTicketsWpfApplication.ViewModels
 			}
 			else
 			{
-                
-
 				// Create run time view services and models
-				if (SimpleIoc.Default.IsRegistered<IRequestManager>())
-				{
-					SimpleIoc.Default.Unregister<IRequestManager>();
-				}
+				//if (SimpleIoc.Default.IsRegistered<IRequestManager>())
+				//{
+				//	SimpleIoc.Default.Unregister<IRequestManager>();
+				//}
 
 				var connection = new DbConnection("data");
 

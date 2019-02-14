@@ -10,14 +10,14 @@
 //*********************************************************
 
 using System;
-using System.Diagnostics.Contracts;
+using System.Net.Http;
 using TravelpayoutsAPI.Library.Infostructures.Implements;
 using TravelpayoutsAPI.Library.Infostructures.Interfaces;
 using TravelpayoutsAPI.Library.Models;
 
 namespace TravelpayoutsAPI.Library
 {
-	public class SearchTicketApiFactory : ISearchTicketApiFactory
+    public class SearchTicketApiFactory : ISearchTicketApiFactory
     {
         private readonly IRequestManager _requestManager;
 
@@ -103,7 +103,7 @@ namespace TravelpayoutsAPI.Library
 
         public SearchTicketApiFactory()
         {
-            _requestManager = new RequestManager();
+            _requestManager = new RequestManager(new HttpClient());
 
             _creatorUserInfoProvider = new Func<IUserInfoProvider>(() => new UserInfoProvider(_requestManager));
             _creatorDataInfoProvider = new Func<IDataInfoProvider>(() => new DataInfoProvider(_requestManager));

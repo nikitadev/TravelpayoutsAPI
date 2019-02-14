@@ -43,7 +43,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
         /// Специальные предложения
         /// </summary>
         /// <returns></returns>
-        Task<List<Offer>> GetSpecialOffers();
+        Task<List<Offer>> GetSpecialOffers(string token);
     }
 
     [ContractClassFor(typeof(ISearchTicketsProvider))]
@@ -56,8 +56,10 @@ namespace TravelpayoutsAPI.Library.Infostructures.Interfaces
             return Task.FromResult(default(List<Ticket>));
         }
 
-        public Task<List<Offer>> GetSpecialOffers()
+        public Task<List<Offer>> GetSpecialOffers(string token)
         {
+            Contract.Requires<ArgumentNullException>(!String.IsNullOrEmpty(token), "Token can not be null or empty.");
+
             Contract.Ensures(Contract.ForAll(Contract.Result<List<Offer>>(), item => item != null));
 
             return Task.FromResult(default(List<Offer>));

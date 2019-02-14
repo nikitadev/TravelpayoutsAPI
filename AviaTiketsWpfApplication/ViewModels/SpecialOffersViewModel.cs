@@ -22,7 +22,7 @@ namespace AviaTicketsWpfApplication.ViewModels
 
         protected override async Task<IEnumerable<Offer>> UpdateCollection()
         {
-            return await _searchTicketApiFactory.MainSearch.GetSpecialOffers();
+            return await _searchTicketApiFactory.MainSearch.GetSpecialOffers(await _token.Value);
         }
     }
 }

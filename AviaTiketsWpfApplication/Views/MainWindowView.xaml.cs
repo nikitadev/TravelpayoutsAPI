@@ -20,7 +20,7 @@ namespace AviaTicketsWpfApplication.Views
         {
             InitializeComponent();
 
-            Closing += (s, e) => { e.Cancel = !_shutdown; DialogMessageHandleAsync(new DialogMessage { DlgType = DialogType.Close }); };
+            Closing += async (s, e) => { e.Cancel = !_shutdown; await DialogMessageHandleAsync(new DialogMessage { DlgType = DialogType.Close }); };
 
             mainFrame.NavigationService.Navigate(DataContext);
         }

@@ -48,7 +48,7 @@ namespace TravelpayoutsAPI.UnitTestProject
                 .Setup(r => r.Get(It.IsAny<Uri>(), It.IsAny<string>(), It.IsAny<bool>()))
                 .ReturnsAsync(xml);
 
-            var offers = await _searchTicketsProvider.GetSpecialOffers();
+            var offers = await _searchTicketsProvider.GetSpecialOffers(It.IsAny<string>());
 
             Assert.IsNotNull(offers, "List of planes is null.");
         }

@@ -35,11 +35,8 @@ namespace AviaTicketsWpfApplication.Fundamentals
 
 		public async Task CreateTableAsync()
 		{
-			if (!await _repositoryCache.Connection.ExistsAsync<CacheItem>())
-			{
-				await _repositoryCache.Connection.CreateTableAsync<CacheItem>();
-			}
-		}
+            await _repositoryCache.Connection.CreateTableAsync<CacheItem>();
+        }
 
 		public async Task InsertUserLocationAsync()
 		{

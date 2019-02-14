@@ -179,11 +179,11 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 		/// Специальные предложения
 		/// </summary>
 		/// <returns></returns>
-        public async Task<List<Offer>> GetSpecialOffers()
+        public async Task<List<Offer>> GetSpecialOffers(string token)
 		{
 			var fullURI = CreateUri(PriceApiSettingsV2.SPECIALOFFER);
 
-			var xml = await _requestManager.Get(fullURI);
+			var xml = await _requestManager.Get(fullURI, token);
 
             using (var textReader = new StringReader(xml))
             {

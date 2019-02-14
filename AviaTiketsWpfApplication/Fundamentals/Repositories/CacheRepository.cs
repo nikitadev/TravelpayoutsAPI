@@ -35,9 +35,7 @@ namespace AviaTicketsWpfApplication.Fundamentals
 
 		public async Task DeleteAsync(CacheItem obj)
 		{
-            await Task.Yield();
-
-			Connection.Delete(obj);
+			await Connection.DeleteAsync(obj);
 		}
 
 		public async Task<CacheItem> GetByIdAsync(int id)

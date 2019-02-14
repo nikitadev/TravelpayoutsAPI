@@ -168,7 +168,6 @@ namespace AviaTicketsWpfApplication.ViewModels
 
             _isSearchProgress = false;
 
-            //Nito.AsyncEx.AsyncContext.Run(async () => await Load());
             SearchCommand = new RelayCommand(SearchCommandHandler, CanExecuteSearchCommand);
         }
 
@@ -188,12 +187,12 @@ namespace AviaTicketsWpfApplication.ViewModels
         private async void SearchCommandHandler()
         {
             IsSeachProgress = true;
-            MessengerInstance.Send<ViewModelMessage>(new ViewModelMessage { IsShowingProgress = true });
+            MessengerInstance.Send(new ViewModelMessage { IsShowingProgress = true });
 
 			var token = await _token.Value;
             var tikets = await _searchTicketsService.GetPrice(token, _searchQuery.Original.Code, _searchQuery.Destination.Code, DepartDate.Value, ReturnDate.Value);
 
-			MessengerInstance.Send<ViewModelMessage>(new ViewModelMessage { IsShowingProgress = false });
+			MessengerInstance.Send(new ViewModelMessage { IsShowingProgress = false });
             IsSeachProgress = false;
         }
     }

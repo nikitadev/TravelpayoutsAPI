@@ -11,7 +11,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
@@ -22,32 +21,36 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
 {
     public class RequestManager : IRequestManager
     {
+        private readonly HttpClient _httpClient;
+
+        public RequestManager(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         public async Task<string> Get(Uri uri, string token, bool isGzip)
         {
             string url = uri.ToString();
             string result;
-            using (var httpClient = new HttpClient())
+            if (!String.IsNullOrEmpty(token))
             {
-                if (!String.IsNullOrEmpty(token))
-                {
-                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Access-Token", token);
-                }
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Access-Token", token);
+            }
 
-                if (isGzip)
-                {
-                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
+            if (isGzip)
+            {
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
 
-                    using (var responseStream = await httpClient.GetStreamAsync(url))
-                    using (var decompressedStream = new GZipStream(responseStream, CompressionMode.Decompress))
-                    using (var streamReader = new StreamReader(decompressedStream))
-                    {
-                        result = await streamReader.ReadToEndAsync();
-                    }
-                }
-                else
+                using (var responseStream = await _httpClient.GetStreamAsync(url))
+                using (var decompressedStream = new GZipStream(responseStream, CompressionMode.Decompress))
+                using (var streamReader = new StreamReader(decompressedStream))
                 {
-                    result = await httpClient.GetStringAsync(url);
+                    result = await streamReader.ReadToEndAsync();
                 }
+            }
+            else
+            {
+                result = await _httpClient.GetStringAsync(url);
             }
 
             return result;
@@ -64,7 +67,7 @@ namespace TravelpayoutsAPI.Library.Infostructures.Implements
         {
             string json = await Get(uri, token, isGzip);
 
-            return JContainer.Parse(json);
+            return JToken.Parse(json);
         }
     }
 }
